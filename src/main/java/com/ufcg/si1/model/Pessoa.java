@@ -1,5 +1,7 @@
 package com.ufcg.si1.model;
 
+import factories.FactoryEndereco;
+
 public class Pessoa {
 
 	private String nome;
@@ -13,9 +15,9 @@ public class Pessoa {
 
 	public Pessoa(String nome, String email, String rua, String uf, String cidade) {
 		
-		endereco = new Endereco(rua, uf, cidade);
 		this.nome = nome;
 		this.email = email;
+		endereco = FactoryEndereco.getEndereco(rua, uf, cidade);
 	}
 
 	public String getNome() {
@@ -42,5 +44,7 @@ public class Pessoa {
 		
 		return this.endereco;
 	}
+	
+	
 
 }
