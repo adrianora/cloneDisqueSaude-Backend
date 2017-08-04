@@ -31,7 +31,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         while (i < indice) {
             if (vetor[i] instanceof UnidadeSaude){
                 UnidadeSaude unidadeSaude = (UnidadeSaude) vetor[i];
-                if(unidadeSaude.pegaCodigo() == codigo){
+                if(unidadeSaude.getCodigo() == codigo){
                     return vetor[i];
                 }
             }else if(vetor[i] instanceof Hospital){
@@ -57,7 +57,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         if (us == null) {throw new Rep("Erro!");
         } else{
         if (us instanceof UnidadeSaude){
-        ((UnidadeSaude) us).mudaCodigo(++geraCodigo);
+        ((UnidadeSaude) us).setCodigo(++geraCodigo);
         }else {
         ((Hospital) us).setCodigo(++geraCodigo);
         }}
@@ -68,7 +68,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 
         if (us instanceof UnidadeSaude){
         UnidadeSaude unidadeSaude = (UnidadeSaude) us;
-        if (this.existe(unidadeSaude.pegaCodigo())){
+        if (this.existe(unidadeSaude.getCodigo())){
         throw new ObjetoJaExistenteException("Objeto jah existe no array");
         }
         } else if (us instanceof Hospital){
@@ -91,7 +91,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         for (int i = 0; i < indice; i++) {
             if (this.vetor[i] instanceof UnidadeSaude){
                 UnidadeSaude unidadeSaude = (UnidadeSaude) vetor[i];
-                if (unidadeSaude.pegaCodigo() == codigo){
+                if (unidadeSaude.getCodigo() == codigo){
                     indiceAux = i;
                     existe = true;
                     break;
@@ -113,7 +113,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         for (Object esp: vetor) {
             if (esp instanceof UnidadeSaude){
                 UnidadeSaude unidadeSaude = (UnidadeSaude) esp;
-                if (unidadeSaude != null && unidadeSaude.pegaCodigo() == id){
+                if (unidadeSaude != null && unidadeSaude.getCodigo() == id){
                     return unidadeSaude;
                 }
             }else if (esp instanceof Hospital){
@@ -131,7 +131,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         for (Object esp: vetor) {
             if (esp instanceof UnidadeSaude){;
                 UnidadeSaude u = (UnidadeSaude) esp;
-                if (u.pegaDescricao().equals(bairro)){
+                if (u.getDescricao().equals(bairro)){
                     return esp;
                 }
             } else if (esp instanceof Hospital){
