@@ -6,29 +6,38 @@ public class Endereco {
 	private String uf;
 	private String cidade;
 
-	public Endereco(){
-
+	public Endereco() {
+		
 	}
 
 	public Endereco(String rua, String uf, String cidade) {
-		
 		this.rua = rua;
 		this.uf = uf;
 		this.cidade = cidade;
 	}
 
 	public String getRua() {
-		
-		return this.rua;
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
 	public String getUf() {
-		
-		return this.uf;
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
 	public String getCidade() {
-		
-		return this.cidade;
+		return cidade;
 	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	
 }

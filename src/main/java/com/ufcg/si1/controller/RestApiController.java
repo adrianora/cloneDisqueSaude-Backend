@@ -159,7 +159,7 @@ public class RestApiController {
     }
 
     @RequestMapping(value = "/especialidade/", method = RequestMethod.POST)
-    public ResponseEntity<String> incluirEspecialidade(@RequestBody Especialidade esp, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<String> incluirEspecialidade(@RequestBody EspecialidadeMedica esp, UriComponentsBuilder ucBuilder) {
         try {
             especialidadeService.insere(esp);
         } catch (Rep e) {
@@ -195,12 +195,12 @@ public class RestApiController {
     @RequestMapping(value = "/especialidade/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id) {
 
-        Especialidade q = especialidadeService.findById(id);
+        EspecialidadeMedica q = especialidadeService.findById(id);
         if (q == null) {
             return new ResponseEntity(new CustomErrorType("Especialidade with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Especialidade>(q, HttpStatus.OK);
+        return new ResponseEntity<EspecialidadeMedica>(q, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/unidade/{id}", method = RequestMethod.GET)

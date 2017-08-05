@@ -1,6 +1,6 @@
 package com.ufcg.si1.service;
 
-import com.ufcg.si1.model.Especialidade;
+import com.ufcg.si1.model.EspecialidadeMedica;
 import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
 import exceptions.Rep;
@@ -12,19 +12,19 @@ import java.util.List;
 @Service("especialidadeService")
 public class EspecialidadeServiceImpl implements EspecialidadeService {
 
-    private Especialidade[] vetor;
+    private EspecialidadeMedica[] vetor;
 
     private int indice;
 
     private int geraCodigo = 0; // para gerar codigos
 
     public EspecialidadeServiceImpl() {
-        vetor = new Especialidade[100];
+        vetor = new EspecialidadeMedica[100];
         indice = 0;
     }
 
     @Override
-    public Especialidade procura(int codigo) throws Rep,
+    public EspecialidadeMedica procura(int codigo) throws Rep,
             ObjetoInexistenteException {
 
         int i = 0;
@@ -52,7 +52,7 @@ public class EspecialidadeServiceImpl implements EspecialidadeService {
     }
 
     @Override
-    public Especialidade getElemento(int posicao) {
+    public EspecialidadeMedica getElemento(int posicao) {
         if (posicao < indice)
             return this.vetor[posicao];
         else
@@ -60,7 +60,7 @@ public class EspecialidadeServiceImpl implements EspecialidadeService {
     }
 
     @Override
-    public void insere(Especialidade esp) throws Rep,
+    public void insere(EspecialidadeMedica esp) throws Rep,
             ObjetoJaExistenteException {
 
         esp.setCodigo(++geraCodigo);
@@ -95,8 +95,8 @@ public class EspecialidadeServiceImpl implements EspecialidadeService {
         return existe;
     }
 
-    public Especialidade findById(long id) {
-        for (Especialidade esp: vetor) {
+    public EspecialidadeMedica findById(long id) {
+        for (EspecialidadeMedica esp: vetor) {
             if (esp.getCodigo() == id) {
                 return esp;
             }

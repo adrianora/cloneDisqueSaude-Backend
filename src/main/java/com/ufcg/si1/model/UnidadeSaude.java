@@ -7,63 +7,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @JsonSubTypes.Type(value = PostoSaude.class, name = "posto")})
-
-public class UnidadeSaude {
+@JsonSubTypes({ @JsonSubTypes.Type(value = PostoSaude.class, name = "posto") })
+public abstract class UnidadeSaude {
 	
-    private int codigo;
+	private long id;
     private String descricao;
-    private List especialidades = new ArrayList();
-    private long [] numeroQueixas = new long[1000];
-    int contador = 0;
+    private List<Long> especialidadesMedicas;
+    private List<Long> queixas;
 
+    public UnidadeSaude() {
+    	this.id = 0;
+    	this.especialidadesMedicas = new ArrayList<Long>();
+        this.queixas = new ArrayList<Long>();
+    }
+    
     public UnidadeSaude(String descricao) {
-
-    	this.codigo = 0; // gerado no repositorio
+        this.id = 0;
+        this.descricao = descricao;
+        this.especialidadesMedicas = new ArrayList<Long>();
+        this.queixas = new ArrayList<Long>();
+    }
+    
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    public long getId() {
+        return this.id;
+    }
+    
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
     
-    public UnidadeSaude(){
+    public String getDescricao() {
+        return this.descricao;
+    }
+
+    public void addEspecialidadeMedica(long idEspecialidade) {
+        this.especialidadesMedicas.add(idEspecialidade);
+    }
     
+    public List<Long> getEspecialidadesMedicas() {
+        return this.especialidadesMedicas;
     }
 
     public void addQueixa(long id) {
+    	this.queixas.add(id);
+    }
     
-    	if (this instanceof PostoSaude){
-        
-    		numeroQueixas[contador] = id;
-    		contador++;
-        }
-    }
-
-    public String getDescricao() {
-        
-    	return this.descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        
-    	this.descricao = descricao;
-    }
-
-    public List<Especialidade> getEspecialidades() {
-        
-    	return this.especialidades;
-    }
-
-    public void adicionarEspecialidade(Especialidade esp) {
-        
-    	this.especialidades.add(esp);
-    }
-
-    public int getCodigo() {
-        
-    	return this.codigo;
-    }
-
-    public void setCodigo(int cod) {
-        
-    	this.codigo = cod;
+    public List<Long> getQueixas() {
+    	return this.queixas;
     }
 
 }

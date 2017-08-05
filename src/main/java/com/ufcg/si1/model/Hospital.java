@@ -1,56 +1,33 @@
 package com.ufcg.si1.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Hospital implements iUnidadeSaude {
+public class Hospital extends UnidadeSaude {
 	
-	Hospital hospital;
-	
-	private int codigo;
-    private String descricao;
-    private List especialidades = new ArrayList();
-    private long [] numeroQueixas = new long[1000];
-    int contador = 0;
-
+	private br.edu.ufcg.Hospital hospital;
+    
+    public Hospital(String descricao, int medicos, int numeroPacientesDia) {
+    	super(descricao);
+    	this.hospital = new br.edu.ufcg.Hospital(descricao, medicos, numeroPacientesDia);
+    }
+    
     public Hospital() {
-
     	super();
+    	this.hospital = new br.edu.ufcg.Hospital(null, 0, 0);    	
     }
-
-    public void addQueixa(long id) {
-
-    	numeroQueixas[contador] = id;
-    	contador++;
-    }
-
-    public String getDescricao() {
-        
-    	return this.descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        
-    	this.descricao = descricao;
-    }
-
-    public List<Especialidade> getEspecialidades() {
-        
-    	return this.especialidades;
-    }
-
-    public void adicionarEspecialidade(Especialidade esp) {
-        
-    	this.especialidades.add(esp);
-    }
-
-    public int getCodigo() {
-        
-    	return this.codigo;
-    }
-
-    public void setCodigo(int cod) {
-        
-    	this.codigo = cod;
-    }
+    
+    public int getAtendentes() {
+		return this.hospital.getNumeroMedicos();
+	}
+    
+	public void setAtendentes(int atendentes) {
+		this.hospital.setNumeroMedicos(atendentes);
+	}
+	
+	public int getTaxaDiariaAtendimentos() {
+		return (int) this.hospital.getNumeroPacientesDia();
+	}
+	
+	public void setTaxaDiariaAtendimentos(int taxaDiariaAtendimentos) {
+		this.hospital.setNumeroPacientesDia(taxaDiariaAtendimentos);
+	}
+    
 }

@@ -1,50 +1,65 @@
 package com.ufcg.si1.model;
 
-import factories.FactoryEndereco;
+import java.io.Serializable;
 
-public class Pessoa {
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-	private String nome;
-	private String email;
-	private Endereco endereco;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
-	public Pessoa(){
+@Entity
+@Table(name = "TB_PESSOAS")
+public class Pessoa implements Serializable {
+	
+	private static final long serialVersionUID = 8916969152235733232L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 		
-		super();
+	@NotNull
+	@Column(name = "email")
+	private String email;
+	
+	@NotNull
+	@Column(name = "nome")
+	private String nome;
+
+	public Pessoa() {
+
 	}
 
-	public Pessoa(String nome, String email, String rua, String uf, String cidade) {
-		
+	public Pessoa(String nome, String email) {
 		this.nome = nome;
 		this.email = email;
-		endereco = FactoryEndereco.getEndereco(rua, uf, cidade);
+	}
+	
+	public Integer getId() {
+		return this.id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
-		
 		return nome;
 	}
 
 	public void setNome(String nome) {
-		
 		this.nome = nome;
 	}
 
 	public String getEmail() {
-		
 		return email;
 	}
 
 	public void setEmail(String email) {
-		
 		this.email = email;
 	}
-	
-	public Endereco getEndereco() {
-		
-		return this.endereco;
-	}
-	
-	
 
 }
