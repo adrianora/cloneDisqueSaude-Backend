@@ -1,6 +1,8 @@
 package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.model.QueixaStatus;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class QueixaServiceImpl implements QueixaService {
         List<Queixa> queixas = new ArrayList<Queixa>();
 
         queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
-                Queixa.FECHADA, "", "Jose Silva",
+                QueixaStatus.FECHADA, "", "Jose Silva",
                 "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
 
 
