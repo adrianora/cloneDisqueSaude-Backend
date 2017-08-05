@@ -25,7 +25,7 @@ import java.util.List;
 public class RestApiController {
 
     QueixaService queixaService = new QueixaServiceImpl();
-    EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
+    EspecialidadeMedicaService especialidadeService = new EspecialidadeMedicaServiceImpl();
     UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
 
     /* situação normal =0
