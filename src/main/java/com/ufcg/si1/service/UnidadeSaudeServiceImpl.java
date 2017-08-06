@@ -1,6 +1,6 @@
 package com.ufcg.si1.service;
 
-import br.edu.ufcg.Hospital;
+import com.ufcg.si1.model.Hospital;
 import com.ufcg.si1.model.UnidadeSaude;
 import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service("unidadeSaudeService")
 public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
-    private Object[] vetor;
+	private Object[] vetor;
 
     private int indice;
 
@@ -31,12 +31,12 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         while (i < indice) {
             if (vetor[i] instanceof UnidadeSaude){
                 UnidadeSaude unidadeSaude = (UnidadeSaude) vetor[i];
-                if(unidadeSaude.getCodigo() == codigo){
+                if(unidadeSaude.getId() == codigo){
                     return vetor[i];
                 }
             }else if(vetor[i] instanceof Hospital){
                 Hospital hospital = (Hospital) vetor[i];
-                if(hospital.getCodigo() == codigo){
+                if(hospital.getId() == codigo){
                     return vetor[i];
                 }
             }
@@ -51,32 +51,33 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
     }
 
     @Override
-    public void insere(Object us) throws Rep,
-            ObjetoJaExistenteException {
+	public void insere(Object us) throws Rep, ObjetoJaExistenteException {
 
-        if (us == null) {throw new Rep("Erro!");
-        } else{
-        if (us instanceof UnidadeSaude){
-        ((UnidadeSaude) us).setCodigo(++geraCodigo);
-        }else {
-        ((Hospital) us).setCodigo(++geraCodigo);
-        }}
+		if (us == null) {
+			throw new Rep("Erro!");
+		} else {
+			if (us instanceof UnidadeSaude) {
+				((UnidadeSaude) us).setId(++geraCodigo);
+			} else {
+				((Hospital) us).setId(++geraCodigo);
+			}
+		}
 
-        if (indice == this.vetor.length) {
-        throw new Rep("Erro ao incluir no array");
-        }
+		if (indice == this.vetor.length) {
+			throw new Rep("Erro ao incluir no array");
+		}
 
-        if (us instanceof UnidadeSaude){
-        UnidadeSaude unidadeSaude = (UnidadeSaude) us;
-        if (this.existe(unidadeSaude.getCodigo())){
-        throw new ObjetoJaExistenteException("Objeto jah existe no array");
-        }
-        } else if (us instanceof Hospital){
-        Hospital hospital = (Hospital) us;
-        if (this.existe(hospital.getCodigo())){
-        throw new ObjetoJaExistenteException("Objeto jah existe no array");
-        }
-        }
+		if (us instanceof UnidadeSaude) {
+			UnidadeSaude unidadeSaude = (UnidadeSaude) us;
+			if (this.existe(unidadeSaude.getId())) {
+				throw new ObjetoJaExistenteException("Objeto jah existe no array");
+			}
+		} else if (us instanceof Hospital) {
+			Hospital hospital = (Hospital) us;
+			if (this.existe(hospital.getId())) {
+				throw new ObjetoJaExistenteException("Objeto jah existe no array");
+			}
+		}
 
 
         this.vetor[indice] = us;
@@ -84,21 +85,21 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
     }
 
     @Override
-    public boolean existe(int codigo) {
+    public boolean existe(long codigo) {
         int indiceAux = 0;
         boolean existe = false;
 
         for (int i = 0; i < indice; i++) {
             if (this.vetor[i] instanceof UnidadeSaude){
                 UnidadeSaude unidadeSaude = (UnidadeSaude) vetor[i];
-                if (unidadeSaude.getCodigo() == codigo){
+                if (unidadeSaude.getId() == codigo){
                     indiceAux = i;
                     existe = true;
                     break;
                 }
             }else if (this.vetor[i] instanceof Hospital){
                 Hospital hospital = (Hospital) vetor[i];
-                if (hospital.getCodigo() == codigo){
+                if (hospital.getId() == codigo){
                     indiceAux = i;
                     existe = true;
                     break;
@@ -113,12 +114,12 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         for (Object esp: vetor) {
             if (esp instanceof UnidadeSaude){
                 UnidadeSaude unidadeSaude = (UnidadeSaude) esp;
-                if (unidadeSaude != null && unidadeSaude.getCodigo() == id){
+                if (unidadeSaude != null && unidadeSaude.getId() == id){
                     return unidadeSaude;
                 }
             }else if (esp instanceof Hospital){
                 Hospital hospital = (Hospital) esp;
-                if (hospital != null && hospital.getCodigo() == id){
+                if (hospital != null && hospital.getId() == id){
                     return hospital;
                 }
             }
