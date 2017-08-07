@@ -13,15 +13,16 @@ import java.util.concurrent.atomic.AtomicLong;
 public class QueixaServiceImpl implements QueixaService {
 
     private static final AtomicLong counter = new AtomicLong();
-
     private static List<Queixa> queixas;
 
     static {
-        queixas = populateDummyQueixas();
+        
+    	queixas = populateDummyQueixas();
     }
 
     private static List<Queixa> populateDummyQueixas() {
-        List<Queixa> queixas = new ArrayList<Queixa>();
+        
+    	List<Queixa> queixas = new ArrayList<Queixa>();
 
         queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
                 Queixa.FECHADA, "", "Jose Silva",
@@ -45,25 +46,31 @@ public class QueixaServiceImpl implements QueixaService {
     }
 
     public List<Queixa> findAllQueixas() {
-        return queixas;
+       
+    	return queixas;
     }
 
     public void saveQueixa(Queixa queixa) {
-        queixa.setId(counter.incrementAndGet());
+       
+    	queixa.setId(counter.incrementAndGet());
         queixas.add(queixa);
     }
 
     public void updateQueixa(Queixa queixa) {
-        int index = queixas.indexOf(queixa);
+       
+    	int index = queixas.indexOf(queixa);
         queixas.set(index, queixa);
     }
 
     public void deleteQueixaById(long id) {
 
         for (Iterator<Queixa> iterator = queixas.iterator(); iterator.hasNext(); ) {
-            Queixa q = iterator.next();
-            if (q.getId() == id) {
-                iterator.remove();
+          
+        	Queixa q = iterator.next();
+            
+        	if (q.getId() == id) {
+               
+        		iterator.remove();
             }
         }
     }
@@ -71,22 +78,28 @@ public class QueixaServiceImpl implements QueixaService {
     @Override
     //este metodo nunca eh chamado, mas se precisar estah aqui
     public int size() {
-        return queixas.size();
+       
+    	return queixas.size();
     }
 
     @Override
     public Iterator<Queixa> getIterator() {
-        return queixas.iterator();
+        
+    	return queixas.iterator();
     }
 
     public void deleteAllUsers() {
-        queixas.clear();
+        
+    	queixas.clear();
     }
 
     public Queixa findById(long id) {
-        for (Queixa queixa : queixas) {
-            if (queixa.getId() == id) {
-                return queixa;
+        
+    	for (Queixa queixa : queixas) {
+          
+    		if (queixa.getId() == id) {
+             
+    			return queixa;
             }
         }
         return null;

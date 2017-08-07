@@ -10,21 +10,17 @@ public interface QueixaService {
 
 	List<Queixa> findAllQueixas();
 
-
     void saveQueixa(Queixa queixa);
-
 
 	Queixa findById(long id);
 
 	void updateQueixa(Queixa user);
-
 
 	void deleteQueixaById(long id);
 
     int size();
 
 	Iterator<Queixa> getIterator();
-
 
 //	boolean isUserExist(Queixa user);
 	

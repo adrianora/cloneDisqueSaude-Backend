@@ -9,6 +9,7 @@ import java.util.List;
 
 
 public interface EspecialidadeMedicaService {
+	
     EspecialidadeMedica procura(long codigo) throws ObjetoInexistenteException;
 
     List<EspecialidadeMedica> getListaEspecialidade();

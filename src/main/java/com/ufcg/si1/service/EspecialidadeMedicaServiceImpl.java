@@ -13,13 +13,17 @@ public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaServic
     private List<EspecialidadeMedica> especialidades;
 
     public EspecialidadeMedicaServiceImpl() {
+    	
         this.especialidades = new ArrayList<>();
     }
 
     @Override
     public EspecialidadeMedica procura(long codigo) throws ObjetoInexistenteException {
+    	
         for (EspecialidadeMedica especialidade: especialidades) {
+        	
 			if(especialidade.getId() == codigo) {
+				
 				return especialidade;
 			}
 		}
@@ -28,39 +32,52 @@ public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaServic
 
     @Override
     public List<EspecialidadeMedica> getListaEspecialidade() {
+    	
         return this.especialidades;
     }
 
     @Override
     public int size() {
+    	
         return this.especialidades.size();
     }
 
     @Override
-    public EspecialidadeMedica getEspecialidade(int posicao) throws ObjetoInexistenteException{
+    public EspecialidadeMedica getEspecialidade(int posicao) throws ObjetoInexistenteException {
+    	
     	EspecialidadeMedica elemento = this.especialidades.get(posicao); 
-        if (elemento != null) return elemento;
+    	
+        if (elemento != null) {
+        	
+        	return elemento; 
+        }
         else {
+        	
         	throw new ObjetoInexistenteException("Essa especialidade não existe");
         }
     }
 
     @Override
     public void insereEspecialidade(EspecialidadeMedica esp) throws ObjetoJaExistenteException, ObjetoInexistenteException {
-        if (this.contains(esp.getId())) {
-            throw new ObjetoJaExistenteException("Especialidade já existe na lista");
+     
+    	if (this.contains(esp.getId())) {
+        
+    		throw new ObjetoJaExistenteException("Especialidade já existe na lista");
         }else {
+        
         	this.especialidades.add(esp);
         }
     }
 
     @Override
     public boolean contains(long codigo) throws ObjetoInexistenteException {
+    	
     	return this.especialidades.contains(procura(codigo));
     }
 
     public EspecialidadeMedica findById(long id) throws ObjetoInexistenteException {
-        EspecialidadeMedica esp = procura(id);
+       
+    	EspecialidadeMedica esp = procura(id);
         return esp;
     }
 
