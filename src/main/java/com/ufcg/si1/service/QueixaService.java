@@ -6,18 +6,15 @@ import java.util.List;
 
 import com.ufcg.si1.model.Queixa;
 
+import exceptions.ObjetoInexistenteException;
+
 public interface QueixaService {
 
 	List<Queixa> findAllQueixas();
 
-
     void saveQueixa(Queixa queixa);
 
-
-	Queixa findById(long id);
-
-	void updateQueixa(Queixa user);
-
+	Queixa findById(long id) throws ObjetoInexistenteException;
 
 	void deleteQueixaById(long id);
 

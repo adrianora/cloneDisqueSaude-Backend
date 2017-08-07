@@ -19,7 +19,7 @@ public class EspecialidadeMedicaServiceTest {
 	}
 	
 	@Test
-	private void testInsere() throws ObjetoJaExistenteException, ObjetoInexistenteException {
+	public void testInsere() throws ObjetoJaExistenteException, ObjetoInexistenteException {
 		esp.insereEspecialidade(new EspecialidadeMedica("pediatria"));
 		esp.insereEspecialidade(new EspecialidadeMedica("oncologia"));
 		esp.insereEspecialidade(new EspecialidadeMedica("oftamologia"));
