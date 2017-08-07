@@ -43,14 +43,18 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
     @Override
     public boolean existe(long codigo) {
         for (UnidadeSaude unidadeSaude : vetor) {
-			if (unidadeSaude.getId() == codigo) return true;
+			if (unidadeSaude.getId() == codigo) {
+				return true;
+			}
 		}
         return false;
     }
 
     public UnidadeSaude findById(long id) throws ObjetoInexistenteException {
         for (UnidadeSaude unidadeSaude : vetor) {
-			if (unidadeSaude.getId() == id) return unidadeSaude;
+			if (unidadeSaude.getId() == id) {
+				return unidadeSaude;
+			}
 		}
         throw new ObjetoInexistenteException("Naõ existe uma unidade de saude cadastrada com esse id");
     }
@@ -58,7 +62,9 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
     @Override
     public UnidadeSaude findByBairro(String bairro) throws ObjetoInexistenteException {
         for (UnidadeSaude unidadeSaude : vetor) {
-			if (unidadeSaude.getDescricao().equals(bairro)) return unidadeSaude;
+			if (unidadeSaude.getDescricao().equals(bairro)) {
+				return unidadeSaude;
+			}
 		}
         throw new ObjetoInexistenteException("Não existe uma unidade de saude nesse bairro");
     }
