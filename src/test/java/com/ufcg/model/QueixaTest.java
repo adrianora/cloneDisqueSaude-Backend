@@ -49,10 +49,10 @@ public class QueixaTest {
 	}
 	
 	private void addQueixasTest() {
-		this.queixas.add(new Queixa(0, "descricao", this.pessoas.get(0), this.enderecos.get(0)));
-		this.queixas.add(new Queixa(1, "descricao", this.pessoas.get(1), this.enderecos.get(1)));
-		this.queixas.add(new Queixa(2, "descricao", this.pessoas.get(2), this.enderecos.get(2)));
-		this.queixas.add(new Queixa(3, "descricao", this.pessoas.get(3), this.enderecos.get(3)));
+		this.queixas.add(new Queixa("descricao", this.pessoas.get(0), this.enderecos.get(0)));
+		this.queixas.add(new Queixa("descricao", this.pessoas.get(1), this.enderecos.get(1)));
+		this.queixas.add(new Queixa("descricao", this.pessoas.get(2), this.enderecos.get(2)));
+		this.queixas.add(new Queixa("descricao", this.pessoas.get(3), this.enderecos.get(3)));
 		
 	}
 	
@@ -92,7 +92,7 @@ public class QueixaTest {
 	@Test
 	public void nullObjectQueixaTest() {
 		this.queixas.add(new Queixa());
-		assertTrue(this.queixas.get(4).getId() == 0);
+		assertTrue(this.queixas.get(4).getId() == null);
 		assertTrue(this.queixas.get(4).getDescricao() == null);
 		assertTrue(this.queixas.get(4).getSituacao() == QueixaStatus.ABERTA);
 		assertTrue(this.queixas.get(4).getSolicitante() == null);
@@ -104,13 +104,13 @@ public class QueixaTest {
 	public void nullSettersQueixaTest() {
 		this.queixas.add(new Queixa());
 		
-		this.queixas.get(4).setId(25);
+		this.queixas.get(4).setId(25L);
 		this.queixas.get(4).setSolicitante(this.pessoas.get(3));
 		this.queixas.get(4).setEndereco(this.enderecos.get(3));
 		this.queixas.get(4).setDescricao("Descrição inserida com setter");
 		this.queixas.get(4).setComentario("Comentário adicionado com setter");
 		
-		assertEquals(25, this.queixas.get(4).getId());
+		assertEquals(new Long(25), this.queixas.get(4).getId());
 		assertEquals(this.pessoas.get(3), this.queixas.get(4).getSolicitante());
 		assertEquals(this.enderecos.get(3), this.queixas.get(4).getEndereco());
 		assertEquals("Descrição inserida com setter", this.queixas.get(4).getDescricao());

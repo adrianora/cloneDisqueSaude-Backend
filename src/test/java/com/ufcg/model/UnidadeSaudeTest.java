@@ -48,13 +48,13 @@ public class UnidadeSaudeTest {
 	
 	private void addEspecialidadesTest() {
 		this.especialidades.add(new EspecialidadeMedica("Cardiologista"));
-		this.especialidades.get(0).setId(0);
+		this.especialidades.get(0).setId(0L);
 		this.especialidades.add(new EspecialidadeMedica("Cirurgião Geral"));
-		this.especialidades.get(1).setId(1);
+		this.especialidades.get(1).setId(1L);
 		this.especialidades.add(new EspecialidadeMedica("Infecologista"));
-		this.especialidades.get(2).setId(2);
+		this.especialidades.get(2).setId(2L);
 		this.especialidades.add(new EspecialidadeMedica("Pediatra"));
-		this.especialidades.get(3).setId(3);
+		this.especialidades.get(3).setId(3L);
 	}
 	
 	@Test
@@ -62,8 +62,8 @@ public class UnidadeSaudeTest {
 		assertEquals("FAP", this.hospitais.get(0).getDescricao());
 		assertEquals(121, this.hospitais.get(0).getAtendentes());
 		assertEquals(231, this.hospitais.get(0).getTaxaDiariaAtendimentos());
-		this.hospitais.get(0).setId(262);
-		assertEquals(262, this.hospitais.get(0).getId());
+		this.hospitais.get(0).setId(262L);
+		assertEquals(new Long(262), this.hospitais.get(0).getId());
 		this.hospitais.get(0).setAtendentes(12);
 		assertEquals(12, this.hospitais.get(0).getAtendentes());
 		this.hospitais.get(0).setTaxaDiariaAtendimentos(24);
@@ -75,8 +75,8 @@ public class UnidadeSaudeTest {
 		assertEquals("Monte Santo", this.postos.get(0).getDescricao());
 		assertEquals(10, this.postos.get(0).getAtendentes());
 		assertEquals(15, this.postos.get(0).getTaxaDiariaAtendimentos());
-		this.postos.get(0).setId(262);
-		assertEquals(262, this.postos.get(0).getId());
+		this.postos.get(0).setId(262L);
+		assertEquals(new Long(262), this.postos.get(0).getId());
 		this.postos.get(0).setAtendentes(12);
 		assertEquals(12, this.postos.get(0).getAtendentes());
 		this.postos.get(0).setTaxaDiariaAtendimentos(24);

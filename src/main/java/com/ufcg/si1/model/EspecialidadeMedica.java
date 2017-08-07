@@ -18,7 +18,7 @@ public class EspecialidadeMedica implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Column(name = "descricao")
@@ -26,34 +26,26 @@ public class EspecialidadeMedica implements Serializable {
 
 	public EspecialidadeMedica() {
 		
-		this.id = 0;
 	}
 
 	public EspecialidadeMedica(String descricao) {
-		
-		this.id = 0;
 		this.descricao = descricao;
 	}
 
 	public String getDescricao() {
-		
 		return this.descricao;
 	}
 
 	public void setDescricao(String descricao) {
-		
 		this.descricao = descricao;
 	}
 
-	public long getId() {
-		
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
-		
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	
 }

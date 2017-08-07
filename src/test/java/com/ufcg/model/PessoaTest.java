@@ -58,7 +58,7 @@ public class PessoaTest {
 		this.pessoas.add(new Pessoa());
 		this.pessoas.get(4).setNome("Nome inserido com setter");
 		this.pessoas.get(4).setEmail("Email inserido com setter");
-		this.pessoas.get(4).setId(62);
+		this.pessoas.get(4).setId(62L);
 		assertEquals("Nome inserido com setter", this.pessoas.get(4).getNome());
 		assertEquals("Email inserido com setter", this.pessoas.get(4).getEmail());
 		assertTrue(62 == this.pessoas.get(4).getId());

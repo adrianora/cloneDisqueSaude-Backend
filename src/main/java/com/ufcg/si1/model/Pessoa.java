@@ -14,17 +14,17 @@ import javax.persistence.GenerationType;
 @Entity
 @Table(name = "TB_PESSOAS")
 public class Pessoa implements Serializable {
-	
+
 	private static final long serialVersionUID = 8916969152235733232L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-		
+	private Long id;
+
 	@NotNull
 	@Column(name = "email")
 	private String email;
-	
+
 	@NotNull
 	@Column(name = "nome")
 	private String nome;
@@ -34,38 +34,31 @@ public class Pessoa implements Serializable {
 	}
 
 	public Pessoa(String nome, String email) {
-		
 		this.nome = nome;
 		this.email = email;
 	}
-	
-	public Integer getId() {
-		
+
+	public Long getId() {
 		return this.id;
 	}
-	
-	public void setId(Integer id) {
-		
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public String getNome() {
-		
 		return nome;
 	}
 
 	public void setNome(String nome) {
-		
 		this.nome = nome;
 	}
 
 	public String getEmail() {
-		
 		return email;
 	}
 
 	public void setEmail(String email) {
-		
 		this.email = email;
 	}
 

@@ -33,7 +33,7 @@ public class Queixa implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Column(name = "descricao")
@@ -56,14 +56,10 @@ public class Queixa implements Serializable {
 	private QueixaStatus situacao;
 
 	public Queixa() {
-		
-		this.id = 0;
 		this.situacao = QueixaStatus.ABERTA;
 	}
 
-	public Queixa(long id, String descricao, Pessoa solicitante, Endereco endereco) {
-		
-		this.id = id;
+	public Queixa(String descricao, Pessoa solicitante, Endereco endereco) {
 		this.descricao = descricao;
 		this.situacao = QueixaStatus.ABERTA;
 		this.solicitante = solicitante;
@@ -71,86 +67,66 @@ public class Queixa implements Serializable {
 	}
 
 	public void abrir() throws ObjetoInvalidoException {
-		
-		if (this.situacao == QueixaStatus.EM_ANDAMENTO || this.situacao == QueixaStatus.FECHADA) {
-		
+		if (this.situacao == QueixaStatus.EM_ANDAMENTO || this.situacao == QueixaStatus.FECHADA)
 			this.situacao = QueixaStatus.ABERTA;
-		}
-		else {
-		
+		else
 			throw new ObjetoInvalidoException("Queixa já está aberta");
-		}
 	}
 
 	public void fechar(String comentario) throws ObjetoInvalidoException {
-		
 		if (this.situacao == QueixaStatus.EM_ANDAMENTO || this.situacao == QueixaStatus.ABERTA) {
-		
 			this.situacao = QueixaStatus.FECHADA;
 			this.comentario = comentario;
 		} else {
-		
 			throw new ObjetoInvalidoException("Queixa já está fechada");
 		}
 	}
 
-	public long getId() {
-		
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public String getDescricao() {
-		
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
-		
 		this.descricao = descricao;
 	}
 
 	public String getComentario() {
-		
 		return comentario;
 	}
 
 	public void setComentario(String comentario) {
-		
 		this.comentario = comentario;
 	}
 
 	public Pessoa getSolicitante() {
-		
 		return solicitante;
 	}
 
 	public void setSolicitante(Pessoa solicitante) {
-		
 		this.solicitante = solicitante;
 	}
 
 	public Endereco getEndereco() {
-		
 		return endereco;
 	}
 
 	public void setEndereco(Endereco endereco) {
-		
 		this.endereco = endereco;
 	}
 
 	public QueixaStatus getSituacao() {
-		
 		return situacao;
 	}
 
 	public void setSituacao(QueixaStatus situacao) {
-		
 		this.situacao = situacao;
 	}
 

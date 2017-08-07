@@ -25,7 +25,7 @@ public abstract class UnidadeSaude implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Column(name = "descricao")
@@ -40,57 +40,45 @@ public abstract class UnidadeSaude implements Serializable {
 	private List<Long> queixas;
 
     public UnidadeSaude() {
-    	
-    	this.id = 0;
     	this.especialidadesMedicas = new ArrayList<Long>();
         this.queixas = new ArrayList<Long>();
     }
     
     public UnidadeSaude(String descricao) {
-    	
-        this.id = 0;
         this.descricao = descricao;
         this.especialidadesMedicas = new ArrayList<Long>();
         this.queixas = new ArrayList<Long>();
     }
     
-    public void setId(long id) {
-    	
+    public void setId(Long id) {
         this.id = id;
     }
     
-    public long getId() {
-    	
+    public Long getId() {
         return this.id;
     }
     
     public void setDescricao(String descricao) {
-    	
         this.descricao = descricao;
     }
     
     public String getDescricao() {
-    	
         return this.descricao;
     }
 
     public void addEspecialidadeMedica(long idEspecialidade) {
-    	
         this.especialidadesMedicas.add(idEspecialidade);
     }
     
     public List<Long> getEspecialidadesMedicas() {
-    	
         return this.especialidadesMedicas;
     }
 
     public void addQueixa(long id) {
-    	
     	this.queixas.add(id);
     }
     
     public List<Long> getQueixas() {
-    	
     	return this.queixas;
     }
 

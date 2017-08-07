@@ -30,39 +30,32 @@ public class Endereco implements Serializable {
 	}
 
 	public Endereco(String rua, String uf, String cidade) {
-		
 		this.rua = rua;
 		this.uf = uf;
 		this.cidade = cidade;
 	}
 
 	public String getRua() {
-		
 		return rua;
 	}
 
 	public void setRua(String rua) {
-		
 		this.rua = rua;
 	}
 
 	public String getUf() {
-		
 		return uf;
 	}
 
 	public void setUf(String uf) {
-		
 		this.uf = uf;
 	}
 
 	public String getCidade() {
-		
 		return cidade;
 	}
 
 	public void setCidade(String cidade) {
-		
 		this.cidade = cidade;
 	}
 	
