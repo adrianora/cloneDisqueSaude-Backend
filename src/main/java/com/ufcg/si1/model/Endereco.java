@@ -1,9 +1,28 @@
 package com.ufcg.si1.model;
 
-public class Endereco {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "TB_ENDERECO")
+public class Endereco implements Serializable {
+
+	private static final long serialVersionUID = -3189336984024792980L;
+	
+	@NotNull
+	@Column(name = "rua")
 	private String rua;
+
+	@NotNull
+	@Column(name = "uf")
 	private String uf;
+	
+	@NotNull
+	@Column(name = "cidade")
 	private String cidade;
 
 	public Endereco() {
