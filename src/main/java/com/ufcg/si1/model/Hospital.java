@@ -1,7 +1,18 @@
 package com.ufcg.si1.model;
 
-public class Hospital extends UnidadeSaude {
-	
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TB_HOSPITAL")
+public class Hospital extends UnidadeSaude implements Serializable {
+
+	private static final long serialVersionUID = 4869314027333613155L;
+
+	@Column(name = "hospital")
 	private br.edu.ufcg.Hospital hospital;
     
     public Hospital(String descricao, int medicos, int numeroPacientesDia) {

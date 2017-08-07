@@ -1,8 +1,24 @@
 package com.ufcg.si1.model;
 
-public class PostoSaude extends UnidadeSaude {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "TB_POSTODESAUDE")
+public class PostoSaude extends UnidadeSaude implements Serializable {
+
+	private static final long serialVersionUID = 5000093145633078354L;
+	
+	@NotNull
+	@Column(name = "atendentes")
 	private int atendentes;
+	
+	@NotNull
+	@Column(name = "taxaDiariaAtendimentos")
 	private int taxaDiariaAtendimentos;
 	
 	public PostoSaude(String descricao, int atendentes, int taxaDiariaAtendimentos) {

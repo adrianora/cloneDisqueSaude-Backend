@@ -1,5 +1,15 @@
 package com.ufcg.si1.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import exceptions.ObjetoInvalidoException;
 
 /**
@@ -15,13 +25,34 @@ import exceptions.ObjetoInvalidoException;
  * As queixas só devem ser fechadas pelos administrados, que devem comentar
  * sempre que a queixa for fechada.
  */
-public class Queixa {
+@Entity
+@Table(name = "TB_QUEIXA")
+public class Queixa implements Serializable {
 
+	private static final long serialVersionUID = 8981354144693127107L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@NotNull
+	@Column(name = "descricao")
 	private String descricao;
+	
+	@NotNull
+	@Column(name = "comentario")
 	private String comentario;
+	
+	@NotNull
+	@Column(name = "solicitante")
 	private Pessoa solicitante;
+	
+	@NotNull
+	@Column(name = "endereco")
 	private Endereco endereco;
+	
+	@NotNull
+	@Column(name = "situacao")
 	private QueixaStatus situacao;
 
 	public Queixa() {
