@@ -12,8 +12,10 @@ public interface QueixaService {
 	
 	public Queixa delete(Long queixaId);
 	
-	public Queixa findOne(Long queixaId);
+	public Queixa findById(Long queixaId);
 	
 	public List<Queixa> findAll();
+	
+	public double getRelacaoQueixasAbertas();
 
 }

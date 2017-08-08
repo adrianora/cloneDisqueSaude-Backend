@@ -81,5 +81,30 @@ public abstract class UnidadeSaude implements Serializable {
     public List<Long> getQueixas() {
     	return this.queixas;
     }
+    
+    public abstract int getAtendentes();
+    
+    public abstract int getTaxaDiariaAtendimentos();
+    
+    public abstract void setAtendentes(int atendentes);
+    
+    public abstract void setTaxaDiariaAtendimentos(int taxaDiariaAtendimentos);
+    
+    @Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UnidadeSaude other = (UnidadeSaude) obj;
+		if (this.descricao == null) {
+			if (other.getDescricao() != null)
+				return false;
+		} else if (!this.descricao.equals(other.getDescricao()))
+			return false;
+		return true;
+	}
 
 }

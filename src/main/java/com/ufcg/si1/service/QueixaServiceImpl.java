@@ -1,6 +1,7 @@
 package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.model.QueixaStatus;
 import com.ufcg.si1.repository.QueixaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class QueixaServiceImpl implements QueixaService {
 	public Queixa save(Queixa queixa) {
 		return queixaRepository.save(queixa);
 	}
+	
 
 	@Override
 	public Queixa delete(Queixa queixa) {
@@ -34,13 +36,23 @@ public class QueixaServiceImpl implements QueixaService {
 	}
 
 	@Override
-	public Queixa findOne(Long queixaId) {
+	public Queixa findById(Long queixaId) {
 		return queixaRepository.findOne(queixaId);
 	}
 
 	@Override
 	public List<Queixa> findAll() {
 		return queixaRepository.findAll();
+	}
+	
+	public double getRelacaoQueixasAbertas() {
+		List<Queixa> queixas = this.findAll();
+		double cont = 0;
+		for(Queixa q : queixas) {
+			if(q.getSituacao() == QueixaStatus.ABERTA)
+				cont ++;
+		}
+		return cont / queixas.size();
 	}
 
 }

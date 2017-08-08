@@ -3,6 +3,8 @@ package com.ufcg.si1.service;
 import com.ufcg.si1.model.EspecialidadeMedica;
 import com.ufcg.si1.repository.EspecialidadeMedicaRepository;
 
+import exceptions.ObjetoJaExistenteException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,8 +16,20 @@ public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaServic
 	EspecialidadeMedicaRepository especialidadeMedicaRepository;
 
 	@Override
-	public EspecialidadeMedica save(EspecialidadeMedica esp) {
+	public EspecialidadeMedica save(EspecialidadeMedica esp) throws ObjetoJaExistenteException  {
+		if(existsEspecialidade(esp)) 
+			throw new ObjetoJaExistenteException("Especialidade Media with description " + 
+		esp.getDescricao() + " already exists");
 		return especialidadeMedicaRepository.save(esp);
+	}
+	
+	//Mudar isso daqui
+	public boolean existsEspecialidade(EspecialidadeMedica esp) {
+		List<EspecialidadeMedica> especialidades = this.findAll();
+		for(EspecialidadeMedica e : especialidades) {
+			if(e.getDescricao().equals(esp.getDescricao())) return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -33,7 +47,7 @@ public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaServic
 	}
 
 	@Override
-	public EspecialidadeMedica findOne(Long espId) {
+	public EspecialidadeMedica findById(Long espId) {
 		return especialidadeMedicaRepository.findOne(espId);
 	}
 
