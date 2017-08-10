@@ -13,7 +13,7 @@ import java.util.List;
 public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaService {
 
 	@Autowired
-	EspecialidadeMedicaRepository especialidadeMedicaRepository;
+	private EspecialidadeMedicaRepository especialidadeMedicaRepository;
 
 	@Override
 	public EspecialidadeMedica save(EspecialidadeMedica esp) throws ObjetoJaExistenteException  {

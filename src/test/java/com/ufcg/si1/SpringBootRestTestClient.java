@@ -8,7 +8,6 @@ import com.ufcg.si1.model.*;
 import com.ufcg.si1.util.ObjWrapper;
 import org.springframework.web.client.RestTemplate;
  
-
 public class SpringBootRestTestClient {
  
     public static final String REST_SERVICE_URI = "http://localhost:5000/SpringBootRestApi/api";

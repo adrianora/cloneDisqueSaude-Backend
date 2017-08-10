@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ufcg.si1.model.Pessoa;
+import com.ufcg.si1.model.Cidadao;
 
 public class PessoaTest {
 	
-	private ArrayList<Pessoa> pessoas;
+	private ArrayList<Cidadao> pessoas;
 	
 	public PessoaTest() {
-		this.pessoas = new ArrayList<Pessoa>();
+		this.pessoas = new ArrayList<Cidadao>();
 	}
 	
 	@Before
@@ -24,10 +24,10 @@ public class PessoaTest {
 	}
 	
 	private void addPessoasTest() {
-		this.pessoas.add(new Pessoa("Adriano", "adriano@email.com"));
-		this.pessoas.add(new Pessoa("Agnaldo", "agnaldo@email.com"));
-		this.pessoas.add(new Pessoa("Rubens", "rubens@email.com"));
-		this.pessoas.add(new Pessoa("Ronnyldo", "ronnyldo@email.com"));
+		this.pessoas.add(new Cidadao("Adriano", "adriano@email.com"));
+		this.pessoas.add(new Cidadao("Agnaldo", "agnaldo@email.com"));
+		this.pessoas.add(new Cidadao("Rubens", "rubens@email.com"));
+		this.pessoas.add(new Cidadao("Ronnyldo", "ronnyldo@email.com"));
 	}
 	
 	@Test
@@ -48,14 +48,14 @@ public class PessoaTest {
 	
 	@Test
 	public void nullObjectPessoaTest() {
-		this.pessoas.add(new Pessoa());
+		this.pessoas.add(new Cidadao());
 		assertTrue(this.pessoas.get(4).getNome() == null);
 		assertTrue(this.pessoas.get(4).getEmail() == null);
 	}
 	
 	@Test
 	public void nullSettersPessoaTest() {
-		this.pessoas.add(new Pessoa());
+		this.pessoas.add(new Cidadao());
 		this.pessoas.get(4).setNome("Nome inserido com setter");
 		this.pessoas.get(4).setEmail("Email inserido com setter");
 		this.pessoas.get(4).setId(62L);

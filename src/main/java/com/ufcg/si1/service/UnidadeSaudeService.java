@@ -2,23 +2,23 @@ package com.ufcg.si1.service;
 
 import java.util.List;
 
-import com.ufcg.si1.model.UnidadeSaude;
+import com.ufcg.si1.model.UnidadeDeSaude;
 
 import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
 
 public interface UnidadeSaudeService {
 
-	public UnidadeSaude save(UnidadeSaude unidade) throws ObjetoJaExistenteException;
+	public UnidadeDeSaude save(UnidadeDeSaude unidade) throws ObjetoJaExistenteException;
 
-	public UnidadeSaude delete(UnidadeSaude unidade);
+	public UnidadeDeSaude delete(UnidadeDeSaude unidade);
 
-	public UnidadeSaude delete(Long unidadeId);
+	public UnidadeDeSaude delete(Long unidadeId);
 
-	public UnidadeSaude findById(Long unidadeId) throws ObjetoInexistenteException;
+	public UnidadeDeSaude findById(Long unidadeId) throws ObjetoInexistenteException;
 
-	public List<UnidadeSaude> findAll();
+	public List<UnidadeDeSaude> findAll();
 	
-	public UnidadeSaude findByBairro(String bairro) throws ObjetoInexistenteException;
+	public UnidadeDeSaude findByBairro(String bairro) throws ObjetoInexistenteException;
 
 }

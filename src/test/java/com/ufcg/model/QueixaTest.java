@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ufcg.si1.model.Endereco;
-import com.ufcg.si1.model.Pessoa;
+import com.ufcg.si1.model.Cidadao;
 import com.ufcg.si1.model.Queixa;
 import com.ufcg.si1.model.QueixaStatus;
 
@@ -17,12 +17,12 @@ import exceptions.ObjetoInvalidoException;
 
 public class QueixaTest {
 	
-	private ArrayList<Pessoa> pessoas;
+	private ArrayList<Cidadao> pessoas;
 	private ArrayList<Endereco> enderecos;
 	private ArrayList<Queixa> queixas;
 	
 	public QueixaTest() {
-		this.pessoas = new ArrayList<Pessoa>();
+		this.pessoas = new ArrayList<Cidadao>();
 		this.enderecos = new ArrayList<Endereco>();
 		this.queixas = new ArrayList<Queixa>();
 	}
@@ -35,10 +35,10 @@ public class QueixaTest {
 	}
 	
 	private void addPessoasTest() {
-		this.pessoas.add(new Pessoa("Adriano", "adriano@email.com"));
-		this.pessoas.add(new Pessoa("Agnaldo", "agnaldo@email.com"));
-		this.pessoas.add(new Pessoa("Rubens", "rubens@email.com"));
-		this.pessoas.add(new Pessoa("Ronnyldo", "ronnyldo@email.com"));
+		this.pessoas.add(new Cidadao("Adriano", "adriano@email.com"));
+		this.pessoas.add(new Cidadao("Agnaldo", "agnaldo@email.com"));
+		this.pessoas.add(new Cidadao("Rubens", "rubens@email.com"));
+		this.pessoas.add(new Cidadao("Ronnyldo", "ronnyldo@email.com"));
 	}
 	
 	private void addEnderecoTest() {

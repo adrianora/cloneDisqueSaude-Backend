@@ -10,17 +10,17 @@ import org.junit.Test;
 
 import com.ufcg.si1.model.EspecialidadeMedica;
 import com.ufcg.si1.model.Hospital;
-import com.ufcg.si1.model.PostoSaude;
-import com.ufcg.si1.model.UnidadeSaude;
+import com.ufcg.si1.model.PostoDeSaude;
+import com.ufcg.si1.model.UnidadeDeSaude;
 
 public class UnidadeSaudeTest {
 	
-	private ArrayList<PostoSaude> postos;
+	private ArrayList<PostoDeSaude> postos;
 	private ArrayList<Hospital> hospitais;
 	private ArrayList<EspecialidadeMedica> especialidades;
 	
 	public UnidadeSaudeTest() {
-		this.postos = new ArrayList<PostoSaude>();
+		this.postos = new ArrayList<PostoDeSaude>();
 		this.hospitais = new ArrayList<Hospital>();
 		this.especialidades = new ArrayList<EspecialidadeMedica>();
 	}
@@ -33,10 +33,10 @@ public class UnidadeSaudeTest {
 	}
 	
 	private void addPostosDeSaudeTest() {
-		this.postos.add(new PostoSaude("Monte Santo", 10, 15));
-		this.postos.add(new PostoSaude("Palmeira", 9, 21));
-		this.postos.add(new PostoSaude("Liberdade", 21, 36));
-		this.postos.add(new PostoSaude("Catolé", 16, 11));
+		this.postos.add(new PostoDeSaude("Monte Santo", 10, 15));
+		this.postos.add(new PostoDeSaude("Palmeira", 9, 21));
+		this.postos.add(new PostoDeSaude("Liberdade", 21, 36));
+		this.postos.add(new PostoDeSaude("Catolé", 16, 11));
 	}
 	
 	private void addHospitaisTest() {
@@ -61,46 +61,31 @@ public class UnidadeSaudeTest {
 	public void hospitalTest() {
 		assertEquals("FAP", this.hospitais.get(0).getDescricao());
 		assertEquals(121, this.hospitais.get(0).getAtendentes());
-		assertEquals(231, this.hospitais.get(0).getTaxaDiariaAtendimentos());
+		assertEquals(231, this.hospitais.get(0).getTaxaDiariaAtendimento());
 		this.hospitais.get(0).setId(262L);
 		assertEquals(new Long(262), this.hospitais.get(0).getId());
 		this.hospitais.get(0).setAtendentes(12);
 		assertEquals(12, this.hospitais.get(0).getAtendentes());
-		this.hospitais.get(0).setTaxaDiariaAtendimentos(24);
-		assertEquals(24, this.hospitais.get(0).getTaxaDiariaAtendimentos());
+		this.hospitais.get(0).setTaxaDiariaAtendimento(24);
+		assertEquals(24, this.hospitais.get(0).getTaxaDiariaAtendimento());
 	}
 	
 	@Test
 	public void postoDeSaudeTest() {
 		assertEquals("Monte Santo", this.postos.get(0).getDescricao());
 		assertEquals(10, this.postos.get(0).getAtendentes());
-		assertEquals(15, this.postos.get(0).getTaxaDiariaAtendimentos());
+		assertEquals(15, this.postos.get(0).getTaxaDiariaAtendimento());
 		this.postos.get(0).setId(262L);
 		assertEquals(new Long(262), this.postos.get(0).getId());
 		this.postos.get(0).setAtendentes(12);
 		assertEquals(12, this.postos.get(0).getAtendentes());
-		this.postos.get(0).setTaxaDiariaAtendimentos(24);
-		assertEquals(24, this.postos.get(0).getTaxaDiariaAtendimentos());
-	}
-	
-	@Test
-	public void queixasUnidadeDeSaudeTest() {
-		ArrayList<UnidadeSaude> unidades = new ArrayList<UnidadeSaude>();
-		unidades.addAll(this.hospitais);
-		unidades.addAll(this.postos);
-		// add queixa no posto de saude
-		assertTrue(unidades.get(0).getQueixas().size() == 0);
-		unidades.get(0).addQueixa(51);
-		assertTrue(unidades.get(0).getQueixas().size() == 1);
-		// add queixa no hospital
-		assertTrue(unidades.get(4).getQueixas().size() == 0);
-		unidades.get(4).addQueixa(21);
-		assertTrue(unidades.get(4).getQueixas().size() == 1);
+		this.postos.get(0).setTaxaDiariaAtendimento(24);
+		assertEquals(24, this.postos.get(0).getTaxaDiariaAtendimento());
 	}
 	
 	@Test
 	public void chamadaPolimorficaTest() {
-		ArrayList<UnidadeSaude> unidades = new ArrayList<UnidadeSaude>();
+		ArrayList<UnidadeDeSaude> unidades = new ArrayList<UnidadeDeSaude>();
 		unidades.addAll(this.hospitais);
 		unidades.addAll(this.postos);
 		assertTrue(unidades.size() == 8);
@@ -114,37 +99,32 @@ public class UnidadeSaudeTest {
 	
 	@Test
 	public void nullObjectPostoDeSaudeTest() {
-		this.postos.add(new PostoSaude());
+		this.postos.add(new PostoDeSaude());
 		assertTrue(this.postos.get(4).getAtendentes() == 0);
-		assertTrue(this.postos.get(4).getTaxaDiariaAtendimentos() == 0);
+		assertTrue(this.postos.get(4).getTaxaDiariaAtendimento() == 0);
 		assertTrue(this.postos.get(4).getDescricao() == null);
 		assertTrue(this.postos.get(4).getEspecialidadesMedicas().size() == 0);
-		assertTrue(this.postos.get(4).getQueixas().size() == 0);
 	}
 	
 	@Test
 	public void nullObjectHospitalTest() {
 		this.hospitais.add(new Hospital());
 		assertTrue(this.hospitais.get(4).getAtendentes() == 0);
-		assertTrue(this.hospitais.get(4).getTaxaDiariaAtendimentos() == 0);
+		assertTrue(this.hospitais.get(4).getTaxaDiariaAtendimento() == 0);
 		assertTrue(this.hospitais.get(4).getDescricao() == null);
 		assertTrue(this.hospitais.get(4).getEspecialidadesMedicas().size() == 0);
-		assertTrue(this.hospitais.get(4).getQueixas().size() == 0);
 	}
 	
 	@Test
 	public void nullSettersPostoDeSaudeTest() {
-		this.postos.add(new PostoSaude());
+		this.postos.add(new PostoDeSaude());
 		this.postos.get(4).setAtendentes(50);
 		assertTrue(this.postos.get(4).getAtendentes() == 50);
-		this.postos.get(4).setTaxaDiariaAtendimentos(21);
-		assertTrue(this.postos.get(4).getTaxaDiariaAtendimentos() == 21);
+		this.postos.get(4).setTaxaDiariaAtendimento(21);
+		assertTrue(this.postos.get(4).getTaxaDiariaAtendimento() == 21);
 		this.postos.get(4).setDescricao("Descrição com setter");
 		assertTrue(this.postos.get(4).getDescricao() == "Descrição com setter");
-		this.postos.get(4).addEspecialidadeMedica(1);
 		assertTrue(this.postos.get(4).getEspecialidadesMedicas() != null);
-		this.postos.get(4).addQueixa(26);
-		assertTrue(this.postos.get(4).getQueixas() != null);
 	}
 
 }

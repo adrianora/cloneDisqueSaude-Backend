@@ -2,6 +2,7 @@ package com.ufcg.si1.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.ufcg.si1.model.PostoSaude;
-import com.ufcg.si1.model.UnidadeSaude;
+import com.ufcg.si1.model.UnidadeDeSaude;
 import com.ufcg.si1.service.UnidadeSaudeService;
 import com.ufcg.si1.service.UnidadeSaudeServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
@@ -24,23 +24,22 @@ import com.ufcg.si1.util.ObjWrapper;
 import br.edu.ufcg.Hospital;
 import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
-import exceptions.Rep;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class HealthUnitApiController {
+public class UnidadeSaudeApiController {
 
-	UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
+	@Autowired
+	private UnidadeSaudeService unidadeSaudeService;
 
 	/**
 	 * Busca todas as unidades de saude.
 	 */
-
 	@RequestMapping(value = "/unidade/", method = RequestMethod.GET)
 	public ResponseEntity<List> getAllUnidades() {
 
-		List<UnidadeSaude> unidades = unidadeSaudeService.findAll();
+		List<UnidadeDeSaude> unidades = unidadeSaudeService.findAll();
 		if (unidades.isEmpty()) {
 			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
 		}
@@ -50,9 +49,8 @@ public class HealthUnitApiController {
 	/**
 	 * Salva uma nova Unidade de Saude.
 	 */
-
 	@RequestMapping(value = "/unidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeSaude us, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeDeSaude us, UriComponentsBuilder ucBuilder) {
 
 		try {
 			unidadeSaudeService.save(us);
@@ -68,11 +66,10 @@ public class HealthUnitApiController {
 	/**
 	 * Consulta uma unidade de saude com o id passado.
 	 */
-
 	@RequestMapping(value = "/unidade/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarUnidadeSaude(@PathVariable("id") long id) throws ObjetoInexistenteException {
 
-		UnidadeSaude us;
+		UnidadeDeSaude us;
 		try {
 			us = unidadeSaudeService.findById(id);
 		} catch (ObjetoInexistenteException ine) {
@@ -85,12 +82,11 @@ public class HealthUnitApiController {
 	/**
 	 * Busca uma unidade de saude pelo bairro.
 	 */
-
 	@RequestMapping(value = "/unidade/busca", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarUnidadeSaudePorBairro(
 			@RequestParam(value = "bairro", required = true) String bairro) {
 
-		UnidadeSaude us;
+		UnidadeDeSaude us;
 
 		try {
 			us = unidadeSaudeService.findByBairro(bairro);
@@ -99,18 +95,17 @@ public class HealthUnitApiController {
 					HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<UnidadeSaude>(us, HttpStatus.OK);
+		return new ResponseEntity<UnidadeDeSaude>(us, HttpStatus.OK);
 	}
 
 	/**
 	 * Metodo para calcular a media medico de pacientes por dia, que eh a razao entre
 	 * o numero de atendentes da unidade pela taxa diaria de atendimentos.
 	 */
-
 	@RequestMapping(value = "/geral/medicos/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> calcularMediaMedicoPacienteDia(@PathVariable("id") long id) {
 
-		UnidadeSaude unidade;
+		UnidadeDeSaude unidade;
 		
 		try {
 			unidade = unidadeSaudeService.findById(id);
@@ -118,7 +113,7 @@ public class HealthUnitApiController {
 			return new ResponseEntity<ObjWrapper<Double>>(HttpStatus.NOT_FOUND);
 		}
 		
-		double c = unidade.getAtendentes() / unidade.getTaxaDiariaAtendimentos();
+		double c = unidade.getAtendentes() / unidade.getTaxaDiariaAtendimento();
 
 		return new ResponseEntity<ObjWrapper<Double>>(new ObjWrapper<Double>(new Double(c)), HttpStatus.OK);
 	}

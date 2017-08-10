@@ -13,14 +13,13 @@ import java.util.List;
 public class QueixaServiceImpl implements QueixaService {
 
 	@Autowired
-	QueixaRepository queixaRepository;
+	private QueixaRepository queixaRepository;
 
 	@Override
 	public Queixa save(Queixa queixa) {
 		return queixaRepository.save(queixa);
 	}
 	
-
 	@Override
 	public Queixa delete(Queixa queixa) {
 		Queixa queixaResult = queixaRepository.findOne(queixa.getId());

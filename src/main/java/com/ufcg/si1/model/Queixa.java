@@ -7,32 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import exceptions.ObjetoInvalidoException;
 
-/**
- * Queixa possui identificador único que deve ser gerado de forma automática.
- * 
- * A queixa será registrada por um cidadão que deve identificar-se através do
- * objeto Pessoa. Informar endereço da queixa. Informar detalhes através da
- * descrição.
- * 
- * Campo de situação informará ao sistema se ela está aberta, fechada ou em
- * andamento através do enumaration QueixaStatus.
- * 
- * As queixas só devem ser fechadas pelos administrados, que devem comentar
- * sempre que a queixa for fechada.
- */
 @Entity
-@Table(name = "TB_QUEIXA")
+@Table(name = "tb_queixa")
 public class Queixa implements Serializable {
 
 	private static final long serialVersionUID = 8981354144693127107L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_queixa")
 	private Long id;
 	
 	@NotNull
@@ -43,15 +35,16 @@ public class Queixa implements Serializable {
 	@Column(name = "comentario")
 	private String comentario;
 	
-	@NotNull
-	@Column(name = "solicitante")
-	private Pessoa solicitante;
+	@ManyToOne
+	@JoinColumn(name = "id_cidadao")
+	@JsonBackReference
+	private Cidadao solicitante;
 	
-	@NotNull
-	@Column(name = "endereco")
+	@ManyToOne
+	@JoinColumn(name = "id_endereco")
+	@JsonBackReference
 	private Endereco endereco;
 	
-	@NotNull
 	@Column(name = "situacao")
 	private QueixaStatus situacao;
 
@@ -59,7 +52,7 @@ public class Queixa implements Serializable {
 		this.situacao = QueixaStatus.ABERTA;
 	}
 
-	public Queixa(String descricao, Pessoa solicitante, Endereco endereco) {
+	public Queixa(String descricao, Cidadao solicitante, Endereco endereco) {
 		this.descricao = descricao;
 		this.situacao = QueixaStatus.ABERTA;
 		this.solicitante = solicitante;
@@ -106,14 +99,14 @@ public class Queixa implements Serializable {
 		this.comentario = comentario;
 	}
 
-	public Pessoa getSolicitante() {
+	public Cidadao getSolicitante() {
 		return solicitante;
 	}
 
-	public void setSolicitante(Pessoa solicitante) {
+	public void setSolicitante(Cidadao solicitante) {
 		this.solicitante = solicitante;
 	}
-
+	
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -132,7 +125,6 @@ public class Queixa implements Serializable {
 
 	@Override
 	public int hashCode() {
-
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
@@ -142,17 +134,12 @@ public class Queixa implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-
-		if (this == obj) {
-
+		if (this == obj)
 			return true;
-		} else if (obj == null || getClass() != obj.getClass()) {
-
+		else if (obj == null || getClass() != obj.getClass())
 			return false;
-		}
-
+		
 		Queixa other = (Queixa) obj;
-
 		return (this.id == other.id);
 	}
 

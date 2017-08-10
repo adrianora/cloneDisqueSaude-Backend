@@ -2,6 +2,7 @@ package com.ufcg.si1.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ufcg.si1.model.EspecialidadeMedica;
-import com.ufcg.si1.model.UnidadeSaude;
+import com.ufcg.si1.model.UnidadeDeSaude;
 import com.ufcg.si1.service.EspecialidadeMedicaService;
 import com.ufcg.si1.service.EspecialidadeMedicaServiceImpl;
 import com.ufcg.si1.service.UnidadeSaudeService;
@@ -28,32 +29,33 @@ import exceptions.Rep;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class SpecialtyApiController {
+public class EspecialidadeMedicaApiController {
 
-	EspecialidadeMedicaService especialidadeService = new EspecialidadeMedicaServiceImpl();
-	UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
+	@Autowired
+	private EspecialidadeMedicaService especialidadeService;
+	
+	@Autowired
+	private UnidadeSaudeService unidadeSaudeService;
 
 	/**
 	 * Busca as especialidades de uma determinada Unidade de Saude.
 	 */
-
 	@RequestMapping(value = "/especialidade/unidades/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@PathVariable("id") long id) {
 
-		UnidadeSaude us;
+		UnidadeDeSaude us;
 		try {
 			us = unidadeSaudeService.findById(id);
 		} catch (ObjetoInexistenteException e) {
 			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(us.getEspecialidadesMedicas(), HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 
 	}
 
 	/**
 	 * Inclui uma nova especialidade, caso a mesma não exista na API.
 	 */
-
 	@RequestMapping(value = "/especialidade/", method = RequestMethod.POST)
 	public ResponseEntity<String> incluirEspecialidade(@RequestBody EspecialidadeMedica esp,
 			UriComponentsBuilder ucBuilder) {
@@ -73,14 +75,13 @@ public class SpecialtyApiController {
 	/**
 	 * Consulta uma especialidade com um determinado id.
 	 */
-
 	@RequestMapping(value = "/especialidade/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id) {
 
 		EspecialidadeMedica esp = especialidadeService.findById(id);
 
 		if (esp == null) {
-			return new ResponseEntity(new CustomErrorType("Especialidade with id " + id + " not found"),
+			return new ResponseEntity<CustomErrorType>(new CustomErrorType("Especialidade with id " + id + " not found"),
 					HttpStatus.NOT_FOUND);
 		}
 
