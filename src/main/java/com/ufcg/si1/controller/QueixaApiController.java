@@ -1,6 +1,7 @@
 package com.ufcg.si1.controller;
 
 import com.ufcg.si1.model.*;
+import com.ufcg.si1.model.dto.QueixaDTO;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.util.CustomErrorType;
 import com.ufcg.si1.util.ObjWrapper;
@@ -47,20 +48,26 @@ public class QueixaApiController {
 	 * Metodo utilizado para abrir uma queixa.
 	 */
 	@RequestMapping(value = "/queixa/", method = RequestMethod.POST)
-	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> abrirQueixa(@RequestBody QueixaDTO queixa) {
+		System.out.println("Request DTO");
+		//try {
+		//	queixa.abrir();
+		//} catch (ObjetoInvalidoException e) {
 
-		try {
-			queixa.abrir();
-		} catch (ObjetoInvalidoException e) {
+		//	return new ResponseEntity<List>(HttpStatus.BAD_REQUEST);
+		//}
+				
+		// cidadao - service
+		// endereco - service
+		// queixa - criar objeto
+		// insere cidadao e endereco
+		// queixa -service
+		// Queixa adicionada = queixaService.save(new Queixa(descricao, solicitante, endereco));
 
-			return new ResponseEntity<List>(HttpStatus.BAD_REQUEST);
-		}
-		Queixa adicionada = queixaService.save(queixa);
+		// HttpHeaders headers = new HttpHeaders();
+		// headers.setLocation(ucBuilder.path("/api/queixa/{id}").buildAndExpand(queixa.getId()).toUri());
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/queixa/{id}").buildAndExpand(queixa.getId()).toUri());
-
-		return new ResponseEntity<Queixa>(adicionada, HttpStatus.CREATED);
+		return new ResponseEntity<Queixa>(new Queixa(), HttpStatus.CREATED);
 	}
 
 	/**
