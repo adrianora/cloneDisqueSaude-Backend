@@ -1,14 +1,10 @@
 package com.ufcg.si1.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,10 +30,6 @@ public class Cidadao implements Serializable {
 	@Column(name = "nome")
 	private String nome;
 	
-	@OneToMany(mappedBy = "solicitante")
-	@JsonManagedReference
-	Set<Queixa> queixas;
-
 	public Cidadao() {
 		
 	}
@@ -71,4 +63,35 @@ public class Cidadao implements Serializable {
 		this.email = email;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cidadao other = (Cidadao) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+	
 }

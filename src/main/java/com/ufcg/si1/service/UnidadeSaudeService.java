@@ -9,16 +9,16 @@ import exceptions.ObjetoJaExistenteException;
 
 public interface UnidadeSaudeService {
 
-	public UnidadeDeSaude save(UnidadeDeSaude unidade) throws ObjetoJaExistenteException;
+	UnidadeDeSaude save(UnidadeDeSaude unidade) throws ObjetoJaExistenteException;
 
-	public UnidadeDeSaude delete(UnidadeDeSaude unidade);
+	UnidadeDeSaude delete(UnidadeDeSaude unidade);
 
-	public UnidadeDeSaude delete(Long unidadeId);
+	UnidadeDeSaude delete(Long unidadeId);
 
-	public UnidadeDeSaude findById(Long unidadeId) throws ObjetoInexistenteException;
+	UnidadeDeSaude findById(Long unidadeId) throws ObjetoInexistenteException;
 
-	public List<UnidadeDeSaude> findAll();
+	List<UnidadeDeSaude> findAll();
 	
-	public UnidadeDeSaude findByBairro(String bairro) throws ObjetoInexistenteException;
+	UnidadeDeSaude findByBairro(String bairro) throws ObjetoInexistenteException;
 
 }

@@ -1,18 +1,16 @@
 package com.ufcg.si1.controller;
 
-import com.ufcg.si1.model.*;
-import com.ufcg.si1.model.dto.QueixaDTO;
-import com.ufcg.si1.service.*;
+import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.model.QueixaStatus;
+import com.ufcg.si1.service.QueixaService;
 import com.ufcg.si1.util.CustomErrorType;
 import com.ufcg.si1.util.ObjWrapper;
-import exceptions.ObjetoInvalidoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class QueixaApiController {
 	/**
 	 * Lista todas as Queixas.
 	 */
-	@RequestMapping(value = "/queixa/", method = RequestMethod.GET)
+	@RequestMapping(value = "/queixa", method = RequestMethod.GET)
 	public ResponseEntity<List<Queixa>> listAllUsers() {
 		List<Queixa> queixas = queixaService.findAll();
 
@@ -47,27 +45,12 @@ public class QueixaApiController {
 	/**
 	 * Metodo utilizado para abrir uma queixa.
 	 */
-	@RequestMapping(value = "/queixa/", method = RequestMethod.POST)
-	public ResponseEntity<?> abrirQueixa(@RequestBody QueixaDTO queixa) {
-		System.out.println("Request DTO");
-		//try {
-		//	queixa.abrir();
-		//} catch (ObjetoInvalidoException e) {
-
-		//	return new ResponseEntity<List>(HttpStatus.BAD_REQUEST);
-		//}
-				
-		// cidadao - service
-		// endereco - service
-		// queixa - criar objeto
-		// insere cidadao e endereco
-		// queixa -service
-		// Queixa adicionada = queixaService.save(new Queixa(descricao, solicitante, endereco));
-
-		// HttpHeaders headers = new HttpHeaders();
-		// headers.setLocation(ucBuilder.path("/api/queixa/{id}").buildAndExpand(queixa.getId()).toUri());
-
-		return new ResponseEntity<Queixa>(new Queixa(), HttpStatus.CREATED);
+	@RequestMapping(value = "/queixa", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Queixa> abrirQueixa(@RequestBody Queixa queixa) {
+		
+		Queixa queixaPersistida = queixaService.add(queixa);
+		
+		return new ResponseEntity<Queixa>(queixaPersistida, HttpStatus.CREATED);
 	}
 
 	/**
@@ -103,7 +86,7 @@ public class QueixaApiController {
 		currentQueixa.setDescricao(queixa.getDescricao());
 		currentQueixa.setComentario(queixa.getComentario());
 
-		currentQueixa = queixaService.save(currentQueixa);
+		currentQueixa = queixaService.update(currentQueixa);
 
 		return new ResponseEntity<Queixa>(currentQueixa, HttpStatus.OK);
 	}
@@ -133,7 +116,7 @@ public class QueixaApiController {
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
 
 		queixaAFechar.setSituacao(QueixaStatus.FECHADA);
-		queixaService.save(queixaAFechar);
+		queixaService.update(queixaAFechar);
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
 	}
 

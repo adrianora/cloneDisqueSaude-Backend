@@ -10,14 +10,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -25,7 +22,10 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @JsonSubTypes.Type(value = PostoDeSaude.class, name = "posto") })
+@JsonSubTypes({
+	@JsonSubTypes.Type(value = PostoDeSaude.class, name = "posto"),
+	@JsonSubTypes.Type(value = Hospital.class, name = "hospital") 
+})
 @Table(name = "tb_unidade_de_saude")
 public abstract class UnidadeDeSaude implements Serializable {
 
@@ -43,11 +43,6 @@ public abstract class UnidadeDeSaude implements Serializable {
 	@OneToMany(mappedBy = "unidadeDeSaude")
 	@JsonManagedReference
 	private Set<EspecialidadeMedica> especialidades;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_endereco")
-	@JsonManagedReference
-	private Endereco endereço;
 
 	public UnidadeDeSaude() {
 		this.especialidades = new HashSet<EspecialidadeMedica>();

@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface EspecialidadeMedicaService {
 	
-	public EspecialidadeMedica save(EspecialidadeMedica esp) throws ObjetoJaExistenteException;
+	EspecialidadeMedica save(EspecialidadeMedica esp) throws ObjetoJaExistenteException;
 	
-	public EspecialidadeMedica delete(EspecialidadeMedica esp);
+	EspecialidadeMedica delete(EspecialidadeMedica esp);
 	
-	public EspecialidadeMedica delete(Long espId);
+	EspecialidadeMedica delete(Long espId);
 	
-	public EspecialidadeMedica findById(Long espId);
+	EspecialidadeMedica findById(Long espId);
 	
-	public List<EspecialidadeMedica> findAll();
+	List<EspecialidadeMedica> findAll();
 
 }

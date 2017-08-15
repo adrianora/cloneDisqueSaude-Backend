@@ -7,12 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import exceptions.ObjetoInvalidoException;
 
@@ -31,20 +27,18 @@ public class Queixa implements Serializable {
 	@Column(name = "descricao")
 	private String descricao;
 	
-	@NotNull
 	@Column(name = "comentario")
 	private String comentario;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_cidadao")
-	@JsonBackReference
+	@NotNull
+	@Column(name = "id_cidadao")
 	private Cidadao solicitante;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_endereco")
-	@JsonBackReference
+	@NotNull
+	@Column(name = "id_endereco")
 	private Endereco endereco;
 	
+	@NotNull
 	@Column(name = "situacao")
 	private QueixaStatus situacao;
 
@@ -121,26 +115,6 @@ public class Queixa implements Serializable {
 
 	public void setSituacao(QueixaStatus situacao) {
 		this.situacao = situacao;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		else if (obj == null || getClass() != obj.getClass())
-			return false;
-		
-		Queixa other = (Queixa) obj;
-		return (this.id == other.id);
 	}
 
 }

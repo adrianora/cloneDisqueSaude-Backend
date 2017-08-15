@@ -5,17 +5,19 @@ import java.util.List;
 import com.ufcg.si1.model.Queixa;
 
 public interface QueixaService {
+	
+	Queixa add(Queixa queixa);
 
-	public Queixa save(Queixa queixa);
+	Queixa update(Queixa queixa);
 	
-	public Queixa delete(Queixa queixa);
+	Queixa delete(Queixa queixa);
 	
-	public Queixa delete(Long queixaId);
+	Queixa delete(Long queixaId);
 	
-	public Queixa findById(Long queixaId);
+	Queixa findById(Long queixaId);
 	
-	public List<Queixa> findAll();
+	List<Queixa> findAll();
 	
-	public double getRelacaoQueixasAbertas();
+	double getRelacaoQueixasAbertas();
 
 }
