@@ -56,18 +56,14 @@ public class EspecialidadeMedicaApiController {
 	/**
 	 * Inclui uma nova especialidade, caso a mesma não exista na API.
 	 */
-	@RequestMapping(value = "/especialidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirEspecialidade(@RequestBody EspecialidadeMedica esp,
-			UriComponentsBuilder ucBuilder) {
+	@RequestMapping(value = "/especialidade", method = RequestMethod.POST)
+	public ResponseEntity<String> incluirEspecialidade(@RequestBody EspecialidadeMedica esp) {
 
 		try {
 			especialidadeService.save(esp);
-		} catch (ObjetoJaExistenteException e) {
+		} catch (ObjetoJaExistenteException e1) {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
-		// Descobrir oq eh isso
-		//HttpHeaders headers = new HttpHeaders();
-		//headers.setLocation(ucBuilder.path("/api/especialidade/{id}").buildAndExpand(esp.getCodigo()).toUri());
 
 		return new ResponseEntity<String>("Especialidade incluida", HttpStatus.CREATED);
 	}
