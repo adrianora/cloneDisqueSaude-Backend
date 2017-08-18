@@ -8,6 +8,8 @@ import exceptions.ObjetoJaExistenteException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("unidadeSaudeService")
@@ -17,9 +19,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 	private UnidadeSaudeRepository unidadeSaudeRepository;
 
 	@Override
-	public UnidadeDeSaude save(UnidadeDeSaude unidade) throws ObjetoJaExistenteException {
-		if(existsUnidadeSaude(unidade)) throw new ObjetoJaExistenteException(
-				"Unidade de saude with descriptin: " + unidade.getDescricao() + " already exists");
+	public UnidadeDeSaude save(UnidadeDeSaude unidade){
 		return unidadeSaudeRepository.save(unidade);
 	}
 	
@@ -31,13 +31,17 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 	}
 	
 	//Isso tambem
-	public UnidadeDeSaude findByBairro(String bairro) throws ObjetoInexistenteException {
+	public List<UnidadeDeSaude> getByBairro(String bairro) throws ObjetoInexistenteException {
 		List<UnidadeDeSaude> unidades = this.findAll();
+		List<UnidadeDeSaude> unidadesComMesmoBairro = new ArrayList<>();
 		for(UnidadeDeSaude u : unidades) {
-			if(u.getDescricao().equals(bairro)) return u;
+			if(u.getDescricao().equals(bairro)) unidadesComMesmoBairro.add(u);
 		}
-		throw new ObjetoInexistenteException("Unidade de saude with "
-				+ "description: " + bairro + " does not exist");
+		if(unidadesComMesmoBairro.isEmpty()) {
+			throw new ObjetoInexistenteException("Unidade de saude with "
+					+ "description: " + bairro + " does not exist");			
+		}
+		return unidadesComMesmoBairro;
 	}
 
 	@Override

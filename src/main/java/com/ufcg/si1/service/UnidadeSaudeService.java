@@ -19,6 +19,6 @@ public interface UnidadeSaudeService {
 
 	List<UnidadeDeSaude> findAll();
 	
-	UnidadeDeSaude findByBairro(String bairro) throws ObjetoInexistenteException;
+	List<UnidadeDeSaude> getByBairro(String bairro) throws ObjetoInexistenteException;
 
 }

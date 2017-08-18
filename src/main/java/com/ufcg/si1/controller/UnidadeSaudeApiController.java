@@ -86,16 +86,16 @@ public class UnidadeSaudeApiController {
 	public ResponseEntity<?> consultarUnidadeSaudePorBairro(
 			@RequestParam(value = "bairro", required = true) String bairro) {
 
-		UnidadeDeSaude us;
+		List<UnidadeDeSaude> us;
 
 		try {
-			us = unidadeSaudeService.findByBairro(bairro);
+			us = unidadeSaudeService.getByBairro(bairro);
 		} catch (ObjetoInexistenteException exp) {
 			return new ResponseEntity(new CustomErrorType("Unidade with bairro " + bairro + " not found"),
 					HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<UnidadeDeSaude>(us, HttpStatus.OK);
+		return new ResponseEntity<List<UnidadeDeSaude>>(us, HttpStatus.OK);
 	}
 
 	/**
