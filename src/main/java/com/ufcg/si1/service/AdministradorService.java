@@ -4,8 +4,6 @@ import com.ufcg.si1.model.Administrador;
 
 public interface AdministradorService {
 	
-	Administrador save(Administrador objAdmin);
-
-	Administrador findByObject(Administrador objAdmin);
+	Administrador login(Administrador objAdmin);
 	
 }

@@ -9,35 +9,43 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "tb_hospital")
 public class Hospital extends UnidadeDeSaude implements Serializable {
-
+	
 	private static final long serialVersionUID = 4869314027333613155L;
 	
 	@Transient
 	private br.edu.ufcg.Hospital hospital;
-
-	public Hospital(String descricao, int medicos, int numeroPacientesDia) {
-		super(descricao);
-		this.hospital = new br.edu.ufcg.Hospital(descricao, medicos, numeroPacientesDia);
-	}
-
+	
 	public Hospital() {
 		super();
+		super.setAtendentes(0);
+		super.setTaxaDiariaAtendimento(0);
 		this.hospital = new br.edu.ufcg.Hospital(null, 0, 0);
 	}
 
+	public Hospital(String descricao, int medicos, int numeroPacientesDia) {
+		super(descricao);
+		super.setAtendentes(medicos);
+		super.setTaxaDiariaAtendimento(numeroPacientesDia);
+		this.hospital = new br.edu.ufcg.Hospital(descricao, medicos, numeroPacientesDia);
+	}
+
 	public int getAtendentes() {
-		return this.hospital.getNumeroMedicos();
+		return super.getAtendentes();
+		// return this.hospital.getNumeroMedicos();
 	}
 
 	public void setAtendentes(int atendentes) {
+		super.setAtendentes(atendentes);
 		this.hospital.setNumeroMedicos(atendentes);
 	}
 
 	public int getTaxaDiariaAtendimento() {
-		return (int) this.hospital.getNumeroPacientesDia();
+		return super.getTaxaDiariaAtendimento();
+		// return (int) this.hospital.getNumeroPacientesDia();
 	}
 
 	public void setTaxaDiariaAtendimento(int taxaDiariaAtendimento) {
+		super.setTaxaDiariaAtendimento(taxaDiariaAtendimento);
 		this.hospital.setNumeroPacientesDia(taxaDiariaAtendimento);
 	}
 

@@ -9,7 +9,7 @@ import exceptions.ObjetoJaExistenteException;
 
 public interface UnidadeSaudeService {
 
-	UnidadeDeSaude save(UnidadeDeSaude unidade) throws ObjetoJaExistenteException;
+	UnidadeDeSaude save(UnidadeDeSaude unidade);
 
 	UnidadeDeSaude delete(UnidadeDeSaude unidade);
 

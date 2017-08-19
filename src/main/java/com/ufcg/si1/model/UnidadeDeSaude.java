@@ -35,10 +35,22 @@ public abstract class UnidadeDeSaude implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_unidade_de_saude")
 	private Long id;
+	
+	@NotNull
+	@Column(name = "tipo")
+	private String tipo;
 
 	@NotNull
 	@Column(name = "descricao")
 	private String descricao;
+	
+	@NotNull
+	@Column(name = "atendentes")
+	private int atendentes;
+	
+	@NotNull
+	@Column(name = "taxa_diaria_atendimento")
+	private int taxaDiariaAtendimento;
 
 	@OneToMany(mappedBy = "unidadeDeSaude")
 	@JsonManagedReference
@@ -61,6 +73,14 @@ public abstract class UnidadeDeSaude implements Serializable {
 		return this.id;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
@@ -77,13 +97,21 @@ public abstract class UnidadeDeSaude implements Serializable {
 		return this.especialidades;
 	}
 
-	public abstract int getAtendentes();
+	public int getAtendentes() {
+		return atendentes;
+	}
 
-	public abstract void setAtendentes(int atendentes);
+	public void setAtendentes(int atendentes) {
+		this.atendentes = atendentes;
+	}
 
-	public abstract int getTaxaDiariaAtendimento();
+	public int getTaxaDiariaAtendimento() {
+		return taxaDiariaAtendimento;
+	}
 
-	public abstract void setTaxaDiariaAtendimento(int taxaDiariaAtendimento);
+	public void setTaxaDiariaAtendimento(int taxaDiariaAtendimento) {
+		this.taxaDiariaAtendimento = taxaDiariaAtendimento;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

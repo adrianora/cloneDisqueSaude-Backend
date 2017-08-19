@@ -16,20 +16,17 @@ import com.ufcg.si1.service.AdministradorService;
 @RequestMapping("/api")
 @CrossOrigin
 public class AdministradorController {
-	
+
 	@Autowired
 	private AdministradorService administradorService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<?> login(@RequestBody Administrador admin) {
-		Administrador superAdmin = new Administrador("admin", "admin@si1.com", "admin");
-		administradorService.save(superAdmin);
-		
-		Administrador objAdmin = administradorService.findByObject(admin);
+	public ResponseEntity<Administrador> login(@RequestBody Administrador admin) {
+		Administrador objAdmin = administradorService.login(admin);
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		if (objAdmin != null) 
+		if (objAdmin != null)
 			status = HttpStatus.OK;
-		return new ResponseEntity<>(objAdmin, status);
+		return new ResponseEntity<Administrador>(objAdmin, status);
 	}
-	
+
 }

@@ -36,31 +36,25 @@ public class UnidadeSaudeApiController {
 	/**
 	 * Busca todas as unidades de saude.
 	 */
-	@RequestMapping(value = "/unidade/", method = RequestMethod.GET)
-	public ResponseEntity<List> getAllUnidades() {
-
+	@RequestMapping(value = "/unidade", method = RequestMethod.GET)
+	public ResponseEntity<List<UnidadeDeSaude>> getAllUnidades() {
 		List<UnidadeDeSaude> unidades = unidadeSaudeService.findAll();
-		if (unidades.isEmpty()) {
-			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(unidades, HttpStatus.OK);
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		if (!unidades.isEmpty())
+			status = HttpStatus.OK;
+		return new ResponseEntity<>(unidades, status);
 	}
 
 	/**
 	 * Salva uma nova Unidade de Saude.
 	 */
-	@RequestMapping(value = "/unidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeDeSaude us, UriComponentsBuilder ucBuilder) {
-
-		try {
-			unidadeSaudeService.save(us);
-		} catch (ObjetoJaExistenteException e) {
-			return new ResponseEntity<String>(HttpStatus.CONFLICT);
-		}
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/unidade/{id}").buildAndExpand(us.getId()).toUri());
-		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+	@RequestMapping(value = "/unidade", method = RequestMethod.POST)
+	public ResponseEntity<UnidadeDeSaude> incluirUnidadeSaude(@RequestBody UnidadeDeSaude unidadeDeSaude) {
+		UnidadeDeSaude unidadeDeSaudeBD = unidadeSaudeService.save(unidadeDeSaude);
+		HttpStatus status = HttpStatus.CONFLICT;
+		if (unidadeDeSaudeBD != null)
+			status = HttpStatus.CREATED;
+		return new ResponseEntity<UnidadeDeSaude>(unidadeDeSaudeBD, status);
 	}
 
 	/**

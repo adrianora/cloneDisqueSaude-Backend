@@ -1,10 +1,10 @@
 package com.ufcg.si1.controller;
 
 import com.ufcg.si1.model.Queixa;
-import com.ufcg.si1.model.QueixaStatus;
 import com.ufcg.si1.service.QueixaService;
 import com.ufcg.si1.util.CustomErrorType;
-import com.ufcg.si1.util.ObjWrapper;
+
+import exceptions.ObjetoInvalidoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +21,6 @@ public class QueixaApiController {
 
 	@Autowired
 	private QueixaService queixaService;
-
-	/*
-	 * situação normal =0 situação extra =1
-	 */
-	private int situacaoAtualPrefeitura = 0;
 
 	/**
 	 * Lista todas as Queixas.
@@ -112,53 +107,16 @@ public class QueixaApiController {
 	/**
 	 * Fecha uma queixa.
 	 */
-	@RequestMapping(value = "/queixa/fechamento", method = RequestMethod.POST)
+	@RequestMapping(value = "/queixa/fechamento", method = RequestMethod.PUT)
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
-
-		queixaAFechar.setSituacao(QueixaStatus.FECHADA);
+		try {
+			queixaAFechar.fechar("fechada");
+		} catch (ObjetoInvalidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		queixaService.update(queixaAFechar);
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
-	}
-
-	/**
-	 * Retorna a situacao geral das queixas dependendo da situacao da prefeitura, Se
-	 * normal: mais de 20% abertas eh ruim, mais de 10 eh regular Se extra: mais de
-	 * 10% abertas eh ruim, mais de 5% eh regular O situacao retornada pode ser 0
-	 * (ruim), 1 (regular) e 2 (bom).
-	 */
-	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
-	public ResponseEntity<?> getSituacaoGeralQueixas() {
-
-		double relacaoQueixasAbertas = queixaService.getRelacaoQueixasAbertas();
-
-		if (situacaoAtualPrefeitura == 0) {
-
-			if (relacaoQueixasAbertas > 0.2) {
-
-				return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
-			} else {
-
-				if (relacaoQueixasAbertas > 0.1) {
-
-					return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
-				}
-			}
-		}
-		if (this.situacaoAtualPrefeitura == 1) {
-
-			if (relacaoQueixasAbertas > 0.1) {
-
-				return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
-			} else {
-
-				if (relacaoQueixasAbertas > 0.05) {
-
-					return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
-				}
-			}
-		}
-
-		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(2), HttpStatus.OK);
 	}
 
 }
