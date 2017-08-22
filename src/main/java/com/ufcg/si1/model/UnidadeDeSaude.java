@@ -54,15 +54,15 @@ public abstract class UnidadeDeSaude implements Serializable {
 
 	@OneToMany(mappedBy = "unidadeDeSaude")
 	@JsonManagedReference
-	private Set<EspecialidadeMedica> especialidades;
+	private Set<EspecialidadeMedica> especialidadesMedicas;
 
 	public UnidadeDeSaude() {
-		this.especialidades = new HashSet<EspecialidadeMedica>();
+		this.especialidadesMedicas = new HashSet<EspecialidadeMedica>();
 	}
 
 	public UnidadeDeSaude(String descricao) {
 		this.descricao = descricao;
-		this.especialidades = new HashSet<EspecialidadeMedica>();
+		this.especialidadesMedicas = new HashSet<EspecialidadeMedica>();
 	}
 
 	public void setId(Long id) {
@@ -90,11 +90,11 @@ public abstract class UnidadeDeSaude implements Serializable {
 	}
 
 	public void addEspecialidadeMedica(EspecialidadeMedica especialidade) {
-		this.especialidades.add(especialidade);
+		this.especialidadesMedicas.add(especialidade);
 	}
 
 	public Set<EspecialidadeMedica> getEspecialidadesMedicas() {
-		return this.especialidades;
+		return this.especialidadesMedicas;
 	}
 
 	public int getAtendentes() {

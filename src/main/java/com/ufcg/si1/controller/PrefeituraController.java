@@ -28,15 +28,15 @@ public class PrefeituraController {
 	
 	/**
 	 * Retorna a situacao geral das queixas dependendo da situacao da prefeitura, Se
-	 * normal: mais de 20% abertas eh ruim, mais de 10 eh regular Se extra: mais de
-	 * 10% abertas eh ruim, mais de 5% eh regular O situacao retornada pode ser 0
-	 * (ruim), 1 (regular) e 2 (bom).
+	 * normal: mais de 20% abertas eh ruim, mais de 10 eh regular, Se extra: mais de
+	 * 10% abertas eh ruim, mais de 5% eh regular, Se Caos: mais de 5% de queixas abertas
+	 * é ruim e mais de 2% é regular, A situacao retornada pode ser 0 (ruim), 1 (regular)
+	 * e 2 (bom).
 	 */
 	@RequestMapping(value = "/prefeitura", method = RequestMethod.GET)
 	public ResponseEntity<RelacaoQueixasStatus> getSituacaoGeralQueixas() {
 		double relacaoQueixasAbertas = queixaService.getRelacaoQueixasAbertas();
 		RelacaoQueixasStatus situacaoGeralQueixas = prefeitura.getSituacaoGeralQueixas(relacaoQueixasAbertas);
-		System.out.println(this.prefeitura.getStatus());		
 		return new ResponseEntity<>(situacaoGeralQueixas, HttpStatus.OK);
 	}
 	
@@ -44,6 +44,11 @@ public class PrefeituraController {
 	public ResponseEntity<PrefeituraStatus> modificarSituacaoPrefeitura(@RequestBody Prefeitura objPrefeitura) {
 		PrefeituraStatus status = objPrefeitura.getSituacao();
 		this.prefeitura.setPrefeituraStatus(status);
+		return new ResponseEntity<>(this.prefeitura.getStatus(), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/prefeitura/status", method = RequestMethod.GET)
+	public ResponseEntity<PrefeituraStatus> getSituacaoPrefeitura() {
 		return new ResponseEntity<>(this.prefeitura.getStatus(), HttpStatus.OK);
 	}
 
