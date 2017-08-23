@@ -3,6 +3,7 @@ package com.ufcg.si1.service;
 import com.ufcg.si1.model.Cidadao;
 import com.ufcg.si1.model.Endereco;
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.model.QueixaAlimento;
 import com.ufcg.si1.model.QueixaStatus;
 import com.ufcg.si1.repository.QueixaRepository;
 
@@ -53,7 +54,7 @@ public class QueixaServiceImpl implements QueixaService {
 	}
 	
 	private Queixa addQueixaNoDB(String descricao, Cidadao cidadao, Endereco endereco) {
-		Queixa queixaInseridaNoBD = new Queixa();
+		Queixa queixaInseridaNoBD = new QueixaAlimento();
 		queixaInseridaNoBD.setDescricao(descricao);
 		queixaInseridaNoBD.setSolicitante(cidadao);
 		queixaInseridaNoBD.setEndereco(endereco);

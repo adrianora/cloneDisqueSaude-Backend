@@ -7,14 +7,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import exceptions.ObjetoInvalidoException;
 
 @Entity
 @Table(name = "tb_queixa")
-public class Queixa implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+	@JsonSubTypes.Type(value = QueixaAnimal.class, name = "animal"),
+	@JsonSubTypes.Type(value = QueixaAlimento.class, name = "alimento")
+})
+public abstract class Queixa implements Serializable {
 
 	private static final long serialVersionUID = 8981354144693127107L;
 
