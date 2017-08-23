@@ -28,11 +28,17 @@ public class QueixaServiceImpl implements QueixaService {
 		return queixaRepository.save(queixa);
 	}
 	
-	@Override
 	public Queixa add(Queixa queixa) {
 		Cidadao cidadao = addCidadaoNoDB(queixa.getSolicitante());
 		Endereco endereco = addEnderecoNoDB(queixa.getEndereco());
-		return addQueixaNoDB(queixa.getDescricao(), cidadao, endereco);
+		return addQueixaNoDB(queixa, cidadao, endereco);
+	}
+
+	private Queixa addQueixaNoDB(Queixa queixa, Cidadao cidadao, Endereco endereco) {
+		Queixa queixaInseridaNoBD = queixa;
+		queixaInseridaNoBD.setSolicitante(cidadao);
+		queixaInseridaNoBD.setEndereco(endereco);
+		return save(queixaInseridaNoBD);
 	}
 	
 	private Cidadao addCidadaoNoDB(Cidadao cidadao) {
@@ -51,14 +57,6 @@ public class QueixaServiceImpl implements QueixaService {
 		else
 			enderecoInseridoNoBD = enderecoService.findByObject(endereco);
 		return enderecoInseridoNoBD;
-	}
-	
-	private Queixa addQueixaNoDB(String descricao, Cidadao cidadao, Endereco endereco) {
-		Queixa queixaInseridaNoBD = new QueixaAlimento();
-		queixaInseridaNoBD.setDescricao(descricao);
-		queixaInseridaNoBD.setSolicitante(cidadao);
-		queixaInseridaNoBD.setEndereco(endereco);
-		return save(queixaInseridaNoBD);
 	}
 
 	@Override
