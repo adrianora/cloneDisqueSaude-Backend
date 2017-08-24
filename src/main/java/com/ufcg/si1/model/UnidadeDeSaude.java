@@ -41,8 +41,8 @@ public abstract class UnidadeDeSaude implements Serializable {
 	private String tipo;
 
 	@NotNull
-	@Column(name = "descricao")
-	private String descricao;
+	@Column(name = "bairro")
+	private String bairro;
 	
 	@NotNull
 	@Column(name = "atendentes")
@@ -61,7 +61,7 @@ public abstract class UnidadeDeSaude implements Serializable {
 	}
 
 	public UnidadeDeSaude(String descricao) {
-		this.descricao = descricao;
+		this.bairro = descricao;
 		this.especialidadesMedicas = new HashSet<EspecialidadeMedica>();
 	}
 
@@ -81,12 +81,12 @@ public abstract class UnidadeDeSaude implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setBairro(String descricao) {
+		this.bairro = descricao;
 	}
 
-	public String getDescricao() {
-		return this.descricao;
+	public String getBairro() {
+		return this.bairro;
 	}
 
 	public void addEspecialidadeMedica(EspecialidadeMedica especialidade) {
@@ -122,10 +122,10 @@ public abstract class UnidadeDeSaude implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		UnidadeDeSaude other = (UnidadeDeSaude) obj;
-		if (this.descricao == null) {
-			if (other.getDescricao() != null)
+		if (this.bairro == null) {
+			if (other.getBairro() != null)
 				return false;
-		} else if (!this.descricao.equals(other.getDescricao()))
+		} else if (!this.bairro.equals(other.getBairro()))
 			return false;
 		return true;
 	}

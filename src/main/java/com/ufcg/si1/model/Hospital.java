@@ -22,11 +22,11 @@ public class Hospital extends UnidadeDeSaude implements Serializable {
 		this.hospital = new br.edu.ufcg.Hospital(null, 0, 0);
 	}
 
-	public Hospital(String descricao, int medicos, int numeroPacientesDia) {
-		super(descricao);
+	public Hospital(String bairro, int medicos, int numeroPacientesDia) {
+		super(bairro);
 		super.setAtendentes(medicos);
 		super.setTaxaDiariaAtendimento(numeroPacientesDia);
-		this.hospital = new br.edu.ufcg.Hospital(descricao, medicos, numeroPacientesDia);
+		this.hospital = new br.edu.ufcg.Hospital(bairro, medicos, numeroPacientesDia);
 	}
 
 	public int getAtendentes() {

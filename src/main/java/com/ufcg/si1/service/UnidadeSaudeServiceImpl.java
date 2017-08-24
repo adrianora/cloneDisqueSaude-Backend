@@ -35,7 +35,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 		List<UnidadeDeSaude> unidades = this.findAll();
 		List<UnidadeDeSaude> unidadesComMesmoBairro = new ArrayList<>();
 		for(UnidadeDeSaude u : unidades) {
-			if(u.getDescricao().equals(bairro)) unidadesComMesmoBairro.add(u);
+			if(u.getBairro().equals(bairro)) unidadesComMesmoBairro.add(u);
 		}
 		if(unidadesComMesmoBairro.isEmpty()) {
 			throw new ObjetoInexistenteException("Unidade de saude with "

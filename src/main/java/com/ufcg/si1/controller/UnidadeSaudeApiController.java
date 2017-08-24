@@ -108,7 +108,6 @@ public class UnidadeSaudeApiController {
 		}
 		
 		double c = (double) unidade.getAtendentes() / unidade.getTaxaDiariaAtendimento();
-		System.out.println(c);
 		return new ResponseEntity<ObjWrapper<Double>>(new ObjWrapper<Double>(new Double(c)), HttpStatus.OK);
 	}
 

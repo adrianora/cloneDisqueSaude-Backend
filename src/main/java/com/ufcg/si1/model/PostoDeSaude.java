@@ -17,8 +17,8 @@ public class PostoDeSaude extends UnidadeDeSaude implements Serializable {
 		super.setTaxaDiariaAtendimento(0);
 	}
 	
-	public PostoDeSaude(String descricao, int atendentes, int taxaDiariaAtendimento) {
-		super(descricao);
+	public PostoDeSaude(String bairro, int atendentes, int taxaDiariaAtendimento) {
+		super(bairro);
 		super.setAtendentes(atendentes);
 		super.setTaxaDiariaAtendimento(taxaDiariaAtendimento);
 	}
