@@ -29,7 +29,6 @@ public class Administrador implements Serializable {
 	@Column(name = "senha")
 	private String senha;
 
-	@NotNull
 	@Column(name = "nome")
 	private String nome;	
 	

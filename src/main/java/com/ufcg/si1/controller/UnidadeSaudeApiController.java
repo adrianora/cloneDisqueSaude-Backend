@@ -96,7 +96,7 @@ public class UnidadeSaudeApiController {
 	 * Metodo para calcular a media medico de pacientes por dia, que eh a razao entre
 	 * o numero de atendentes da unidade pela taxa diaria de atendimentos.
 	 */
-	@RequestMapping(value = "/geral/medicos/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/unidade/media/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> calcularMediaMedicoPacienteDia(@PathVariable("id") long id) {
 
 		UnidadeDeSaude unidade;
@@ -107,8 +107,8 @@ public class UnidadeSaudeApiController {
 			return new ResponseEntity<ObjWrapper<Double>>(HttpStatus.NOT_FOUND);
 		}
 		
-		double c = unidade.getAtendentes() / unidade.getTaxaDiariaAtendimento();
-
+		double c = (double) unidade.getAtendentes() / unidade.getTaxaDiariaAtendimento();
+		System.out.println(c);
 		return new ResponseEntity<ObjWrapper<Double>>(new ObjWrapper<Double>(new Double(c)), HttpStatus.OK);
 	}
 
