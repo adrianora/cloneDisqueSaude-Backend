@@ -110,7 +110,7 @@ public class QueixaApiController {
 	@RequestMapping(value = "/queixa/fechamento", method = RequestMethod.PUT)
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
 		try {
-			queixaAFechar.fechar("fechada");
+			queixaAFechar.fechar(queixaAFechar.getComentario());
 		} catch (ObjetoInvalidoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

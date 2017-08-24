@@ -1,8 +1,12 @@
 package com.ufcg.si1.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+@Entity
+@Table(name = "tb_queixa_animal")
 public class QueixaAnimal extends Queixa {
 	
 	@NotNull
