@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ufcg.si1.model.Cidadao;
+import com.ufcg.si1.pojo.Cidadao;
 import com.ufcg.si1.repository.CidadaoRepository;
 
 @Service("cidadaoService")

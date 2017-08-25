@@ -3,9 +3,9 @@ package com.ufcg.si1.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ufcg.si1.model.Prefeitura;
-import com.ufcg.si1.model.PrefeituraStatus;
-import com.ufcg.si1.model.RelacaoQueixasStatus;
+import com.ufcg.si1.pojo.Prefeitura;
+import com.ufcg.si1.pojo.PrefeituraStatus;
+import com.ufcg.si1.pojo.QueixaSituacao;
 import com.ufcg.si1.repository.PrefeituraRepository;
 
 @Service("prefeituraService")
@@ -22,7 +22,7 @@ public class PrefeituraServiceImpl implements PrefeituraService {
 	}
 
 	@Override
-	public RelacaoQueixasStatus getSituacaoGeralQueixas(double relacaoQueixasAbertas) {
+	public QueixaSituacao getSituacaoGeralQueixas(double relacaoQueixasAbertas) {
 		return prefeituraSingleton().getSituacaoGeralQueixas(relacaoQueixasAbertas);
 	}
 

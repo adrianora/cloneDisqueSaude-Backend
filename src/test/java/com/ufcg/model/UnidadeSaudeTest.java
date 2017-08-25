@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ufcg.si1.model.EspecialidadeMedica;
-import com.ufcg.si1.model.Hospital;
-import com.ufcg.si1.model.PostoDeSaude;
-import com.ufcg.si1.model.UnidadeDeSaude;
+import com.ufcg.si1.pojo.EspecialidadeMedica;
+import com.ufcg.si1.pojo.Hospital;
+import com.ufcg.si1.pojo.PostoDeSaude;
+import com.ufcg.si1.pojo.UnidadeDeSaude;
 
 public class UnidadeSaudeTest {
 	

@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ufcg.si1.model.Endereco;
-import com.ufcg.si1.model.Cidadao;
-import com.ufcg.si1.model.Queixa;
-import com.ufcg.si1.model.QueixaStatus;
+import com.ufcg.si1.pojo.Cidadao;
+import com.ufcg.si1.pojo.Endereco;
+import com.ufcg.si1.pojo.Queixa;
+import com.ufcg.si1.pojo.QueixaStatus;
 
 import exceptions.ObjetoInvalidoException;
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ufcg.si1.model.Cidadao;
+import com.ufcg.si1.pojo.Cidadao;
 
 public class PessoaTest {
 	

@@ -2,7 +2,7 @@ package com.ufcg.si1.service;
 
 import java.util.List;
 
-import com.ufcg.si1.model.Cidadao;
+import com.ufcg.si1.pojo.Cidadao;
 
 public interface CidadaoService {
 

@@ -1,21 +1,24 @@
 package com.ufcg.si1.service;
 
-import com.ufcg.si1.model.EspecialidadeMedica;
+import exceptions.EspecialidadeMedicaException;
 
-import exceptions.ObjetoJaExistenteException;
+import java.util.Set;
 
-import java.util.List;
+import com.ufcg.si1.pojo.EspecialidadeMedica;
+import com.ufcg.si1.pojo.UnidadeDeSaude;
 
 public interface EspecialidadeMedicaService {
 	
-	EspecialidadeMedica save(EspecialidadeMedica esp) throws ObjetoJaExistenteException;
+	EspecialidadeMedica save(EspecialidadeMedica esp) throws EspecialidadeMedicaException;
 	
-	EspecialidadeMedica delete(EspecialidadeMedica esp);
+	EspecialidadeMedica delete(EspecialidadeMedica esp) throws EspecialidadeMedicaException;
 	
-	EspecialidadeMedica delete(Long espId);
+	EspecialidadeMedica delete(Long espId) throws EspecialidadeMedicaException;
 	
-	EspecialidadeMedica findById(Long espId);
+	EspecialidadeMedica findById(Long espId) throws EspecialidadeMedicaException;
 	
-	List<EspecialidadeMedica> findAll();
+	EspecialidadeMedica addEspecialidadeMedica(EspecialidadeMedica especialidade);
+	
+	Set<UnidadeDeSaude> findEspecialidadeMedicaByUnidadeSaude(Long espId) throws EspecialidadeMedicaException;
 
 }

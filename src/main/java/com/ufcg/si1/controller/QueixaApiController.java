@@ -1,6 +1,6 @@
 package com.ufcg.si1.controller;
 
-import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.pojo.Queixa;
 import com.ufcg.si1.service.QueixaService;
 import com.ufcg.si1.util.CustomErrorType;
 
@@ -40,7 +40,7 @@ public class QueixaApiController {
 	/**
 	 * Metodo utilizado para abrir uma queixa.
 	 */
-	@RequestMapping(value = "/queixa", method = RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/queixa", method = RequestMethod.POST)
 	public ResponseEntity<Queixa> abrirQueixa(@RequestBody Queixa queixa) {
 		
 		Queixa queixaPersistida = queixaService.add(queixa);

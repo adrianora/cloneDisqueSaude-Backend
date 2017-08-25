@@ -1,13 +1,16 @@
 package com.ufcg.si1.service;
 
-import com.ufcg.si1.model.EspecialidadeMedica;
+import com.ufcg.si1.pojo.EspecialidadeMedica;
+import com.ufcg.si1.pojo.UnidadeDeSaude;
 import com.ufcg.si1.repository.EspecialidadeMedicaRepository;
 
-import exceptions.ObjetoJaExistenteException;
+import exceptions.EspecialidadeMedicaException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Set;
 
 @Service("especialidadeService")
 public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaService {
@@ -16,44 +19,88 @@ public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaServic
 	private EspecialidadeMedicaRepository especialidadeMedicaRepository;
 
 	@Override
-	public EspecialidadeMedica save(EspecialidadeMedica esp) throws ObjetoJaExistenteException  {
-		if(existsEspecialidade(esp)) 
-			throw new ObjetoJaExistenteException("Especialidade Media with description " + 
-		esp.getDescricao() + " already exists");
+	public EspecialidadeMedica save(EspecialidadeMedica esp) throws EspecialidadeMedicaException {
+		if (contains(esp))
+			throw new EspecialidadeMedicaException("ja existe no banco de dados.");
 		return especialidadeMedicaRepository.save(esp);
 	}
-	
-	//Mudar isso daqui
-	public boolean existsEspecialidade(EspecialidadeMedica esp) {
-		List<EspecialidadeMedica> especialidades = this.findAll();
-		for(EspecialidadeMedica e : especialidades) {
-			if(e.getDescricao().equals(esp.getDescricao())) return true;
-		}
-		return false;
+
+	@Override
+	public EspecialidadeMedica delete(EspecialidadeMedica esp) throws EspecialidadeMedicaException {
+		if (!contains(esp))
+			throw new EspecialidadeMedicaException("nao existe no banco de dados.");
+		especialidadeMedicaRepository.delete(esp);
+		return esp;
 	}
 
 	@Override
-	public EspecialidadeMedica delete(EspecialidadeMedica esp) {
-		EspecialidadeMedica espResult = especialidadeMedicaRepository.findOne(esp.getId());
-		especialidadeMedicaRepository.delete(espResult);
-		return espResult;
-	}
-
-	@Override
-	public EspecialidadeMedica delete(Long espId) {
+	public EspecialidadeMedica delete(Long espId) throws EspecialidadeMedicaException {
 		EspecialidadeMedica espResult = especialidadeMedicaRepository.findOne(espId);
+		if (espResult == null)
+			throw new EspecialidadeMedicaException("nao existe no banco de dados.");
 		especialidadeMedicaRepository.delete(espResult);
 		return espResult;
 	}
 
 	@Override
-	public EspecialidadeMedica findById(Long espId) {
-		return especialidadeMedicaRepository.findOne(espId);
+	public EspecialidadeMedica findById(Long espId) throws EspecialidadeMedicaException {
+		EspecialidadeMedica espResult = especialidadeMedicaRepository.findOne(espId);
+		if (espResult == null)
+			throw new EspecialidadeMedicaException("nao existe no banco de dados.");
+		return espResult;
+	}
+
+	/**
+	 * Metodo utilizado pela service da Unidade de Saude. Nao utiliza exceptions e
+	 * retorna existencia ou insercao do objeto no banco de dados.
+	 */
+	@Override
+	public EspecialidadeMedica addEspecialidadeMedica(EspecialidadeMedica especialidade) {
+		EspecialidadeMedica especialidadeNoBD = findByObject(especialidade);
+		if (especialidadeNoBD == null)
+			especialidadeNoBD = especialidadeMedicaRepository.save(especialidade);
+		return especialidadeNoBD;
 	}
 
 	@Override
-	public List<EspecialidadeMedica> findAll() {
-		return especialidadeMedicaRepository.findAll();
+	public Set<UnidadeDeSaude> findEspecialidadeMedicaByUnidadeSaude(Long espId) throws EspecialidadeMedicaException {
+		return findEspecialidadeMedica(espId).getUnidadesDeSaude();
+	}
+
+	/**
+	 * Realiza busca por especialidade medica no banco de dados.
+	 */
+	private EspecialidadeMedica findByObject(EspecialidadeMedica especialidade) {
+		List<EspecialidadeMedica> especialidades = especialidadeMedicaRepository.findAll();
+		EspecialidadeMedica especialidadeNoBD = null;
+		for (int index = 0; index < especialidades.size(); index++) {
+			if (especialidades.get(index).equals(especialidade))
+				especialidadeNoBD = especialidades.get(index);
+		}
+		return especialidadeNoBD;
+	}
+
+	/**
+	 * Valida existencia da unidade de saude no banco de dados e acesso a objetos
+	 * nulos, retornando exception.
+	 */
+	private EspecialidadeMedica findEspecialidadeMedica(long espId) throws EspecialidadeMedicaException {
+		EspecialidadeMedica especialidade = especialidadeMedicaRepository.findOne(espId);
+		if (especialidade == null)
+			throw new EspecialidadeMedicaException("nao existe.");
+		return especialidade;
+	}
+
+	/**
+	 * Pesquisa na lista auxiliar a existencia de determinado objeto utilizando
+	 * implementacao equals() da classe 'EspecialidadeMedica'.
+	 */
+	private boolean contains(EspecialidadeMedica especialidade) {
+		boolean result = false;
+		List<EspecialidadeMedica> espResult = especialidadeMedicaRepository.findAll();
+		if (espResult.contains(especialidade))
+			result = true;
+		return result;
 	}
 
 }

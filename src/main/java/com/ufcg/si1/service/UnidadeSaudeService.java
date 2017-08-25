@@ -2,10 +2,11 @@ package com.ufcg.si1.service;
 
 import java.util.List;
 
-import com.ufcg.si1.model.UnidadeDeSaude;
+import com.ufcg.si1.pojo.EspecialidadeMedica;
+import com.ufcg.si1.pojo.UnidadeDeSaude;
 
 import exceptions.ObjetoInexistenteException;
-import exceptions.ObjetoJaExistenteException;
+import exceptions.UnidadeSaudeException;
 
 public interface UnidadeSaudeService {
 
@@ -19,6 +20,8 @@ public interface UnidadeSaudeService {
 
 	List<UnidadeDeSaude> findAll();
 	
-	List<UnidadeDeSaude> getByBairro(String bairro) throws ObjetoInexistenteException;
+	UnidadeDeSaude addEspecialidadeMedica(Long unidadeSaudeId, EspecialidadeMedica especialidade) throws UnidadeSaudeException;
+	
+	List<UnidadeDeSaude> findByBairro(String bairro) throws UnidadeSaudeException;
 
 }

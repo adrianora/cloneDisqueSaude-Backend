@@ -1,10 +1,8 @@
 package com.ufcg.si1.service;
 
-import com.ufcg.si1.model.Cidadao;
-import com.ufcg.si1.model.Endereco;
-import com.ufcg.si1.model.Queixa;
-import com.ufcg.si1.model.QueixaAlimento;
-import com.ufcg.si1.model.QueixaStatus;
+import com.ufcg.si1.pojo.Cidadao;
+import com.ufcg.si1.pojo.Queixa;
+import com.ufcg.si1.pojo.QueixaStatus;
 import com.ufcg.si1.repository.QueixaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,6 @@ public class QueixaServiceImpl implements QueixaService {
 	private QueixaRepository queixaRepository;
 	
 	@Autowired
-	private EnderecoService enderecoService;
-	
-	@Autowired
 	private CidadaoService cidadaoService;
 	
 	private Queixa save(Queixa queixa) {
@@ -30,14 +25,12 @@ public class QueixaServiceImpl implements QueixaService {
 	
 	public Queixa add(Queixa queixa) {
 		Cidadao cidadao = addCidadaoNoDB(queixa.getSolicitante());
-		Endereco endereco = addEnderecoNoDB(queixa.getEndereco());
-		return addQueixaNoDB(queixa, cidadao, endereco);
+		return addQueixaNoDB(queixa, cidadao);
 	}
 
-	private Queixa addQueixaNoDB(Queixa queixa, Cidadao cidadao, Endereco endereco) {
+	private Queixa addQueixaNoDB(Queixa queixa, Cidadao cidadao) {
 		Queixa queixaInseridaNoBD = queixa;
 		queixaInseridaNoBD.setSolicitante(cidadao);
-		queixaInseridaNoBD.setEndereco(endereco);
 		return save(queixaInseridaNoBD);
 	}
 	
@@ -48,15 +41,6 @@ public class QueixaServiceImpl implements QueixaService {
 		else
 			cidadaoInseridoNoBD = cidadaoService.findByObject(cidadao);
 		return cidadaoInseridoNoBD;
-	}
-	
-	private Endereco addEnderecoNoDB(Endereco endereco) {
-		Endereco enderecoInseridoNoBD;
-		if (enderecoService.findByObject(endereco) == null)
-			enderecoInseridoNoBD = enderecoService.save(endereco);
-		else
-			enderecoInseridoNoBD = enderecoService.findByObject(endereco);
-		return enderecoInseridoNoBD;
 	}
 
 	@Override

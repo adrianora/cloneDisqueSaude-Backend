@@ -1,7 +1,7 @@
 package com.ufcg.si1.service;
 
-import com.ufcg.si1.model.PrefeituraStatus;
-import com.ufcg.si1.model.RelacaoQueixasStatus;
+import com.ufcg.si1.pojo.PrefeituraStatus;
+import com.ufcg.si1.pojo.QueixaSituacao;
 
 /**
  * Utiliza do padrao Singleton para garantir a existencia de uma unica
@@ -15,7 +15,7 @@ public interface PrefeituraService {
 	 * 10% abertas eh ruim, mais de 5% eh regular O situacao retornada pode ser 0
 	 * (ruim), 1 (regular) e 2 (bom).
 	 */
-	RelacaoQueixasStatus getSituacaoGeralQueixas(double relacaoQueixasAbertas);
+	QueixaSituacao getSituacaoGeralQueixas(double relacaoQueixasAbertas);
 
 	/**
 	 * Interage sobre o singleton para garantir a existencia da prefeitura no
