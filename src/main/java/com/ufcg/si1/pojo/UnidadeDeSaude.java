@@ -117,5 +117,9 @@ public abstract class UnidadeDeSaude implements Serializable {
 	public void setTaxaDiariaAtendimento(int taxaDiariaAtendimento) {
 		this.taxaDiariaAtendimento = taxaDiariaAtendimento;
 	}
+	
+	public String getTipo() {
+		return this.getClass().getSimpleName();
+	}
 
 }

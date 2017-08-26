@@ -86,7 +86,7 @@ public class UnidadeSaudeApiController {
 	/**
 	 * Busca uma unidade de saude pelo bairro.
 	 */
-	@RequestMapping(value = "/unidade/busca/{bairro}", method = RequestMethod.POST)
+	@RequestMapping(value = "/unidade/busca/{bairro}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarUnidadeSaudePorBairro(@PathVariable("bairro") String bairro) {
 		List<UnidadeDeSaude> unidades;
 		try {
