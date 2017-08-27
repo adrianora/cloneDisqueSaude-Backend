@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 @Service("unidadeSaudeService")
 public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
@@ -24,7 +27,19 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 
 	@Override
 	public UnidadeDeSaude save(UnidadeDeSaude unidade){
-		return unidadeSaudeRepository.save(unidade);
+		UnidadeDeSaude unidadeNoBD = unidade;
+		Set<EspecialidadeMedica> especialidadesNoBD = addEspecialidadesMedicasNoRepository(unidade.getEspecialidadesMedicas());
+		unidadeNoBD.setEspecialidadesMedicas(especialidadesNoBD);
+		return unidadeSaudeRepository.save(unidadeNoBD);
+	}
+	
+	private Set<EspecialidadeMedica> addEspecialidadesMedicasNoRepository(Set<EspecialidadeMedica> especialidades) {
+		Set<EspecialidadeMedica> especialidadesNoBD = new HashSet<EspecialidadeMedica>();
+		Iterator<EspecialidadeMedica> conjunto = especialidades.iterator();
+		while (conjunto.hasNext()) {
+			especialidadesNoBD.add(especialidadeMedicaService.addEspecialidadeMedica(conjunto.next()));
+		}
+		return especialidadesNoBD;
 	}
 	
 	@Override

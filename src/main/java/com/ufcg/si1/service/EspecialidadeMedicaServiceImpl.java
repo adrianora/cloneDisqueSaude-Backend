@@ -61,12 +61,7 @@ public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaServic
 			especialidadeNoBD = especialidadeMedicaRepository.save(especialidade);
 		return especialidadeNoBD;
 	}
-
-	@Override
-	public Set<UnidadeDeSaude> findEspecialidadeMedicaByUnidadeSaude(Long espId) throws EspecialidadeMedicaException {
-		return findEspecialidadeMedica(espId).getUnidadesDeSaude();
-	}
-
+	
 	/**
 	 * Realiza busca por especialidade medica no banco de dados.
 	 */
@@ -78,6 +73,11 @@ public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaServic
 				especialidadeNoBD = especialidades.get(index);
 		}
 		return especialidadeNoBD;
+	}
+
+	@Override
+	public Set<UnidadeDeSaude> findEspecialidadeMedicaByUnidadeSaude(Long espId) throws EspecialidadeMedicaException {
+		return findEspecialidadeMedica(espId).getUnidadesDeSaude();
 	}
 
 	/**
