@@ -103,4 +103,13 @@ public class EspecialidadeMedicaServiceImpl implements EspecialidadeMedicaServic
 		return result;
 	}
 
+	@Override
+	public EspecialidadeMedica findByDescricao(String descricao) throws EspecialidadeMedicaException {
+		List<EspecialidadeMedica> especialidades = especialidadeMedicaRepository.findAll();
+		for (EspecialidadeMedica e : especialidades) {
+			if(e.getDescricao().equals(descricao)) return e;
+		}
+		throw new EspecialidadeMedicaException("nao existe.");
+	}
+
 }

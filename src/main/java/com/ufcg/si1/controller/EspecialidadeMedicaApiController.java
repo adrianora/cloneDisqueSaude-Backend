@@ -1,5 +1,6 @@
 package com.ufcg.si1.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ufcg.si1.pojo.EspecialidadeMedica;
 import com.ufcg.si1.pojo.UnidadeDeSaude;
 import com.ufcg.si1.service.EspecialidadeMedicaService;
+import com.ufcg.si1.service.UnidadeSaudeService;
 
 import exceptions.EspecialidadeMedicaException;
+import exceptions.UnidadeSaudeException;
 
 @RestController
 @RequestMapping("/api")
@@ -25,6 +28,8 @@ public class EspecialidadeMedicaApiController {
 
 	@Autowired
 	private EspecialidadeMedicaService especialidadeMedicaService;
+	@Autowired
+	private UnidadeSaudeService unidadeSaudeService;
 
 	/**
 	 * Busca as especialidades de uma determinada Unidade de Saude.
@@ -66,6 +71,22 @@ public class EspecialidadeMedicaApiController {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<EspecialidadeMedica>(especialidadeMedica, HttpStatus.OK);
+	}
+	
+	/**
+	 * Busca quais unidades de saúde tem a especialidade passada.
+	 */
+	@RequestMapping(value = "/especialidade/unidade/{descricao}", method = RequestMethod.GET)
+	public ResponseEntity<?> buscarUnidadePorEspecialidade(@PathVariable("descricao") String descricao) {
+		List<UnidadeDeSaude> unidades;
+		EspecialidadeMedica esp;
+		try {
+			esp = especialidadeMedicaService.findByDescricao(descricao);
+			unidades = unidadeSaudeService.findByEspecialidade(esp);
+		} catch (EspecialidadeMedicaException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<UnidadeDeSaude>>(unidades, HttpStatus.OK);
 	}
 
 }

@@ -21,4 +21,6 @@ public interface EspecialidadeMedicaService {
 	
 	Set<UnidadeDeSaude> findEspecialidadeMedicaByUnidadeSaude(Long espId) throws EspecialidadeMedicaException;
 
+	EspecialidadeMedica findByDescricao(String descricao) throws EspecialidadeMedicaException;
+
 }

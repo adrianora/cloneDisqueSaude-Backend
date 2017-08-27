@@ -24,4 +24,6 @@ public interface UnidadeSaudeService {
 	
 	List<UnidadeDeSaude> findByBairro(String bairro) throws UnidadeSaudeException;
 
+	List<UnidadeDeSaude> findByEspecialidade(EspecialidadeMedica especialidade);
+
 }

@@ -110,5 +110,15 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 		unidade.addEspecialidadeMedica(especialidade);
 		unidadeSaudeRepository.save(unidade);
 	}
+
+	@Override
+	public List<UnidadeDeSaude> findByEspecialidade(EspecialidadeMedica especialidade) {
+		List<UnidadeDeSaude> unidades = unidadeSaudeRepository.findAll();
+		List<UnidadeDeSaude> unidadesComMesmaEspecialidade = new ArrayList<>();
+		for(UnidadeDeSaude u : unidades) {
+			if(u.getEspecialidadesMedicas().contains(especialidade)) unidadesComMesmaEspecialidade.add(u);
+		}
+		return unidadesComMesmaEspecialidade;
+	}
 	
 }

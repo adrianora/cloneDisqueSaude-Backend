@@ -23,7 +23,8 @@ import exceptions.ObjetoInvalidoException;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo")
 @JsonSubTypes({
 	@JsonSubTypes.Type(value = QueixaAnimal.class, name = "animal"),
-	@JsonSubTypes.Type(value = QueixaAlimento.class, name = "alimento")
+	@JsonSubTypes.Type(value = QueixaAlimento.class, name = "alimento"),
+	@JsonSubTypes.Type(value = QueixaGeral.class, name = "geral")
 })
 public abstract class Queixa implements Serializable {
 
